@@ -75,7 +75,7 @@ html {
     overflow-x: hidden;
 
     /* FIX ANCHOR BUG : Empêche les titres de glisser sous la barre fixe */
-    scroll-padding-top: var(--header-height);
+    scroll-padding-top: calc(var(--header-height) + 1rem + 0.5rem);
 
     /* SUPPORT DU SCROLL SNAP MOBILE (Actif uniquement si déclenché par les media queries) */
     /* scroll-snap-type: y proximity; */
@@ -119,36 +119,56 @@ section:nth-child(even) {
     background-color: var(--bg-surface);
 }
 
-/* --- En-tête (Header) Ultra-Stabilisé Élite --- */
-header[role="banner"] {
-    background-color: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    /* Sécurité Apple */
-    border-bottom: 1px solid var(--border-color);
-    z-index: 100;
-    width: 100%;
-    height: var(--header-height);
+/* ==========================================================================
+   NVHFAST - HEADER COMPOSANT FLOTTANT HAUT DE GAMME (STANDARDS COCOON UI)
+   ========================================================================== */
 
-    /* 🌟 COMPORTEMENT DESKTOP UNIQUE (SOURIS CLASSIC) */
+header[role="banner"] {
     position: sticky;
-    top: 0;
+    top: 1rem;
+    /* Décolle le header du haut de l'écran pour l'effet flottant */
+    z-index: 100;
+    width: calc(100% - 2rem);
+    /* Laisse de l'espace à gauche et à droite */
+    max-width: var(--container-max-width);
+    /* S'aligne sur la largeur utile du site (1200px) */
+    height: var(--header-height);
+    margin-right: auto;
+    margin-left: auto;
+
+    /* 60% : Fond effet verre fumé blanc pur translucide */
+    background-color: rgba(255, 255, 255, 0.80);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    /* Sécurité Apple */
+
+    /* RAPPEL DE MARQUE ÉLITE : Bordures latérales et haute très discrètes... */
+    border: 1px solid rgba(33, 47, 61, 0.08);
+    /* ... et ligne de lumière turquoise subtile uniquement sur le bord inférieur */
+    border-bottom: 2px solid var(--color-brand);
+
+    /* Contour ardoise ultra-subtile */
+    border-radius: var(--radius-md);
+
+    /* Ombre portée douce pour détacher la capsule au scroll */
+    box-shadow: 0 4px 30px rgba(33, 47, 61, 0.04);
+
+    transition: var(--transition-smooth);
 }
 
-/* 🌟 EXTENSION UNIVERSELLE POUR ÉCRANS TACTILES (MOBILE, TABLETTE, SURFACE PRO)
-   On remplace le sticky instable par le fixed absolu géré par le GPU sur tous les écrans tactiles, 
-   peu importe leur taille en pixels ! */
+/* EXTENSION COMPORTEMENT MOBILE & TACTILE ACCÉLÉRÉ (FIX GPU INTERNE) */
 @media (pointer: coarse) {
     header[role="banner"] {
         position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
+        top: 1rem !important;
+        left: 1rem !important;
+        right: 1rem !important;
+        width: calc(100% - 2rem);
     }
 
-    /* SÉCURITÉ DE FLUX : Comme le 'fixed' sort le header du flux HTML, on applique 
-       une marge de sécurité sur le corps du site pour éviter que le Hero ne glisse en dessous */
+    /* Sécurité de flux augmentée sur le body pour compenser l'espace flottant */
     body {
-        padding-top: var(--header-height);
+        padding-top: calc(var(--header-height) + 1.5rem);
     }
 }
 
