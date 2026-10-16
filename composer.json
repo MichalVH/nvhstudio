@@ -1,0 +1,35 @@
+{
+    "name": "nvhstudio/nvhfast",
+    "description": "Micro-framework PHP orienté performance absolue pour sites vitrines haut de gamme.",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Artisan du Web Freelance"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "altorouter/altorouter": "^2.0",
+        "phpmailer/phpmailer": "^7.1",
+        "psr/container": "^2.0",
+        "twig/twig": "^3.0",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.3",
+        "phpunit/phpunit": "^12.5"
+    }
+}

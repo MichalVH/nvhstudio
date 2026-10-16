@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+{% block meta_description %}Découvrez nos services web d'élite, axés sur la performance absolue, la sécurité et l'excellence technique.{% endblock %}
+
+{% block body %}
+    {# --- INCLUSION DYNAMIQUE DES BLOCS DU ONE-PAGE (ORDRE CHRONOLOGIQUE) --- #}
+    {% include 'partials/_hero.html.twig' %}
+    {% include 'partials/_services.html.twig' %}
+    {% include 'partials/_about.html.twig' %}
+    {% include 'partials/_testimonials.html.twig' %}
+    {% include 'partials/_blog.html.twig' %}
+    {% include 'partials/_portfolio.html.twig' %}
+    {% include 'partials/_equipe.html.twig' %}
+    {% include 'partials/_faq.html.twig' %}
+    {% include 'partials/_tarifs.html.twig' %}
+    {% include 'partials/_contact.html.twig' %}
+{% endblock %}

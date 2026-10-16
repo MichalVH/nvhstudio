@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Erreur interne - 500 - NVH Studio{% endblock %}
+
+{% block body %}
+    <section class="error-page-section">
+        <div class="container error-page-container">
+            <div class="error-content-box">
+                <h1 class="error-huge-code error-500-code">500</h1>
+                <h2 class="error-main-title">Une erreur interne est survenue</h2>
+                <p class="error-lead-text">
+                    Notre équipe technique a été automatiquement notifiée. Nous mettons tout en œuvre pour rétablir la situation dans les plus brefs délais. Veuillez réessayer ultérieurement.
+                </p>
+                <a href="{{ app.base_path }}/" class="btn btn-primary error-return-btn">
+                    Retourner à l'accueil
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

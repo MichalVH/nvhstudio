@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # RÈGLE 1 : Si le fichier ou le dossier existe physiquement, on le sert directement
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # RÈGLE 2 : Sinon, on redirige vers index.php de manière relative au dossier courant
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>

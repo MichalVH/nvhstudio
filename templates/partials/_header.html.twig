@@ -1,0 +1,16 @@
+{# templates/partials/_header.html.twig #}
+<header role="banner">
+    <div class="container header-grid">
+        <!-- BLOC 1 : Le Logo -->
+        <div class="logo-block">
+            <span class="logo-title">{{ site_name|default('Solution Web') }}</span>
+            <span class="logo-slogan">{{ site_slogan|default('Performance & Excellence') }}</span>
+        </div>
+        
+        <!-- BLOC 2 : Les Liens principaux (qui incluent le bouton burger) -->
+        {% include 'partials/_nav.html.twig' %}
+
+        <!-- BLOC 3 DESKTOP : Ta nouvelle barre d'action, masquée sur mobile -->
+        {% include 'partials/_navbar-contact.html.twig' with {'classes': 'desktop-only'} %}
+    </div>
+</header>

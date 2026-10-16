@@ -1,0 +1,46 @@
+# ===========================================================================
+# SÉCURITÉ & SECRETS (CRITIQUE : À ne JAMAIS commit)
+# ===========================================================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.pub
+
+# ===========================================================================
+# DÉPENDANCES & COMPILATION
+# ===========================================================================
+/vendor/
+composer.lock
+
+# ===========================================================================
+# ZONE D'ÉCRITURE SYSTÈME / CACHE & LOGS (Garantit le 100/100 PageSpeed)
+# ===========================================================================
+/var/cache/*
+/var/logs/*
+# On force Git à conserver la structure des dossiers vides grâce au .gitkeep
+!/var/cache/.gitkeep
+!/var/logs/.gitkeep
+
+.phpunit.result.cache
+
+# ===========================================================================
+# ENVIRONNEMENT DE DÉVELOPPEMENT / IDE (Spécifique à votre machine)
+# ===========================================================================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# ===========================================================================
+# LARAGON / WAMP / SERVEUR LOCAL
+# ===========================================================================
+.error.log
+access.log
+error.log

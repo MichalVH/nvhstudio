@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% block meta_description %}Site vitrine haut de gamme sur mesure par NVH Studio.{% endblock %}">
+    
+        <title>{% block title %}Bienvenue{% endblock %} | NVH Studio</title>
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ app.base_path }}/assets/css/style.css">
+        {% endblock %}
+
+    </head>
+    <body>
+
+        <!-- Inclusion de l'en-tête et de la navbar -->
+        {% include 'partials/_header.html.twig' %}
+
+        <!-- Zone dynamique spécifique à chaque page -->
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
+        <!-- Inclusion du pied de page -->
+        {% include 'partials/_footer.html.twig' %}
+
+        {% block javascripts %}
+            <script type="module" src="{{ app.base_path }}/assets/js/app.js"></script>
+        {% endblock %}
+
+        {# --- COMPOSANT PREMIUM UI : MODALE DE CONFIRMATION DE LEAD (FLASH) --- #}
+        {% if has_flash('success') %}
+            <div id="success-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+                <div class="modal-wrapper">
+                    <div class="modal-icon">
+                        <svg xmlns="http://w3.org" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 id="modal-title" class="modal-title">Demande transmise !</h3>
+                    <p class="modal-text">{{ get_flash('success') }}</p>
+                    <button type="button" class="btn btn-primary btn-modal-close" onclick="document.getElementById('success-modal').remove()">
+                        Fermer la fenêtre
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+
+    </body>
+</html>

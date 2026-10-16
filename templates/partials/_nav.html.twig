@@ -1,0 +1,37 @@
+{# templates/partials/_nav.html.twig #}
+<nav role="navigation" aria-label="Navigation principale">
+    <button id="burger-btn" class="burger-trigger" aria-label="Ouvrir le menu de navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="menu-drawer">
+        <ul>
+            <li><a href="{{ app.base_path }}/accueil" data-section="hero">Accueil</a></li>
+            <li><a href="{{ app.base_path }}/services" data-section="services">Services</a></li>
+            <li><a href="{{ app.base_path }}/a-propos" data-section="about">À propos</a></li>
+            <li><a href="{{ app.base_path }}/temoignages" data-section="testimonials">Témoignages</a></li>
+            
+            <!-- 6ème LIEN : Le dossier Dropdown -->
+            <li class="dropdown-parent">
+                <!-- Trouve la ligne du dropdown-trigger et remplace le caractère par celui-ci : -->
+                <!-- Remplace la ligne par celle-ci : -->
+                <!-- Remplace la ligne par celle-ci (VS Code va adorer) : -->
+                <a href="#" class="dropdown-trigger">Dropdown <span class="arrow">&rsaquo;</span></a>
+                
+                <ul class="dropdown-menu">
+                    <li><a href="{{ app.base_path }}/blog" data-section="blog">Notre Blog</a></li>
+                    <li><a href="{{ app.base_path }}/portfolio" data-section="portfolio">Réalisations</a></li>
+                    <li><a href="{{ app.base_path }}/equipe" data-section="team">L'Équipe</a></li>
+                    <li><a href="{{ app.base_path }}/faq" data-section="faq">Questions / FAQ</a></li>
+                    <li><a href="{{ app.base_path }}/tarifs" data-section="pricing">Nos Tarifs</a></li>
+                </ul>
+            </li>
+
+            <li><a href="{{ app.base_path }}/contact" data-section="contact">Contact</a></li>
+        </ul>
+
+        {% include 'partials/_navbar-contact.html.twig' with {'classes': 'mobile-only'} %}
+    </div>
+</nav>
