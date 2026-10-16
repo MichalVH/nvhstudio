@@ -14,7 +14,7 @@ export class Navigation {
     }
 
     init() {
-        this.navLinks = document.querySelectorAll('nav ul a');
+        this.navLinks = document.querySelectorAll('nav ul a, .logo-studio, .cta-group a');
 
         if (this.navLinks.length > 0) {
             this.registerEvents();

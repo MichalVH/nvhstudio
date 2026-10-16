@@ -3,25 +3,42 @@
    ========================================================================== */
 
 :root {
-    /* --- Palette Neutre Élite AAA --- */
+    /* ==========================================================================
+       60% : DOMINANTE (Fonds épurés, modernes & ultra-rapides)
+       ========================================================================== */
     --bg-main: #ffffff;
-    --bg-surface: #fafafa;
+    /* Blanc pur pour l'aspect net et la vitesse visuelle */
+    --bg-surface: #f8f9fa;
+    /* Gris très clair pour casser la monotonie des sections paires */
     --bg-surface-alt: #f1f5f9;
-    --text-primary: #020617;
-    /* Slate 950 */
-    --text-secondary: #1e293b;
-    /* Slate 800 */
-    --text-muted: #475569;
-    /* Slate 600 */
-    --color-accent: #18181b;
-    /* Jais Pur */
-    --color-accent-hover: #3f3f46;
-    --color-brand: #4f46e5;
-    /* Indigo */
-    --border-color: #458596;
+    /* Gris-bleu subtil pour les survols neutres et les wireframes */
+    --border-color: #d1d5db;
+    /* Gris universel doux pour des bordures discrètes */
 
+    /* ==========================================================================
+       30% : IDENTITÉ DE MARQUE (Typographies Acier - Contraste AAA)
+       ========================================================================== */
+    --text-primary: #212f3d;
+    /* H1, H2, H3 : Bleu-Gris acier (Ratio élite 13.6:1) */
+    --text-secondary: #1c2833;
+    /* Paragraphes : Ardoise sombre ultra-lisible (Ratio 15.3:1) */
+    --text-muted: #5d6d7e;
+    /* Textes secondaires : Ajusté pour valider le ratio WCAG à 4.7:1 */
+
+    /* ==========================================================================
+       10% : ACCENT / ACTION (Turquoise Lumineux Sécurisé)
+       ========================================================================== */
+    --color-brand: #00a3b4;
+    /* Turquoise de marque pour les liens et micro-accents */
+    --color-accent: #212f3d;
+    /* Fond du bouton principal (Ardoise pour contraste max) */
+    --color-accent-hover: #00b4d8;
+    /* Survol du bouton principal (Effet turquoise électrique) */
+
+    /* ==========================================================================
+       INFRASTRUCTURE & CONFIGURATION NVHFAST
+       ========================================================================== */
     --header-height: 90px;
-
     --font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
     --space-xs: 0.5rem;
@@ -49,7 +66,7 @@ html {
     font-family: var(--font-system);
     font-size: 16px;
     line-height: 1.5;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     background-color: var(--bg-main);
     scroll-behavior: auto;
     -webkit-text-size-adjust: 100%;
@@ -112,7 +129,6 @@ header[role="banner"] {
     z-index: 100;
     width: 100%;
     height: var(--header-height);
-    /* 90px */
 
     /* 🌟 COMPORTEMENT DESKTOP UNIQUE (SOURIS CLASSIC) */
     position: sticky;
@@ -153,21 +169,103 @@ header[role="banner"] .container {
     /* 🌟 FIX DIRECT : Prend 100% des 90px du parent sans forcer sa propre hauteur */
 }
 
+/* ==========================================================================
+   NVHFAST - IDENTITY SYSTEM (NVH STUDIO LOGO CORE)
+   ========================================================================== */
 
-.logo-block {
+.logo-studio {
+    display: inline-flex;
+    text-decoration: none;
+    color: var(--text-primary);
+    /* Bleu-Gris acier */
+    transition: var(--transition-smooth);
+}
+
+.logo-studio:hover {
+    opacity: 0.95;
+}
+
+.logo-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
-.logo-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: -0.025em;
+.logo-text-row {
+    display: flex;
+    align-items: baseline;
+    line-height: 1;
 }
 
-.logo-slogan {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
+/* Le Trigramme NVH : Massif, fixe et géométrique avec une police native */
+.logo-studio .logo-trigger {
+    font-family: var(--font-system);
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    /* Bleu-Gris acier */
+    line-height: 1;
+}
+
+/* Le mot 'studio' */
+.logo-studio .logo-sub {
+    font-family: var(--font-system);
+    font-size: 1.35rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--text-muted);
+    /* Gris-Bleu adouci pour la hiérarchie visuelle */
+    text-transform: lowercase;
+    margin-left: 0.25rem;
+    position: relative;
+    display: inline-flex;
+    align-items: baseline;
+}
+
+/* L'Étoile en Exposant (17) : Géométrie pure via clip-path vectoriel */
+.logo-studio .logo-star-exponent {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-brand);
+    /* Ton turquoise de marque */
+    margin-left: 0.15rem;
+    align-self: flex-start;
+    transform: translateY(-4px);
+    clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
+    animation: starContinuousShimmer 4s infinite ease-in-out;
+}
+
+/* Le Slogan */
+.logo-studio .logo-slogan {
+    font-family: var(--font-system);
+    font-size: 0.70rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    /* Gris-Bleu adouci */
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+}
+
+/* --- LOGO ENGINE ANIMATION (GPU ACCELERATED) --- */
+@keyframes starContinuousShimmer {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: translateY(-4px) scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: translateY(-4px) scale(1.2);
+        /* Pulsation sur l'étoile */
+        background-color: var(--color-accent-hover);
+        /* Aligné sur ton turquoise électrique */
+    }
 }
 
 /* --- Navigation Desktop par défaut --- */
@@ -244,9 +342,9 @@ nav a:hover {
 
 /* --- Effets au Survol Élite (Desktop) --- */
 .btn-contact-circle:hover {
-    background-color: var(--color-accent);
+    background-color: var(--color-accent-hover);
     /* Passe sur ton fond noir de marque */
-    border-color: var(--color-accent);
+    /* border-color: var(--color-accent); */
     color: var(--bg-main);
     /* L'icône vire au blanc pur */
     transform: translateY(-2px);
@@ -285,7 +383,7 @@ nav a:hover {
     left: 50%;
     transform: translateX(-50%) translateY(10px);
     min-width: 200px;
-    background-color: #ffffff;
+    background-color: var(--bg-main);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
@@ -334,6 +432,7 @@ nav a:hover {
     font-size: clamp(1.6rem, 4vw, 2.2rem);
     font-weight: 800;
     letter-spacing: -0.03em;
+    color: var(--text-primary);
     margin-bottom: var(--space-md);
 }
 
@@ -342,6 +441,7 @@ nav a:hover {
     font-size: clamp(1.6rem, 4vw, 2.2rem);
     font-weight: 800;
     letter-spacing: -0.03em;
+    color: var(--text-primary);
     margin-bottom: var(--space-sm);
 }
 
@@ -362,6 +462,7 @@ nav a:hover {
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1.1;
+    color: var(--text-primary);
     max-width: 800px;
     margin-bottom: var(--space-sm);
 }
@@ -403,7 +504,7 @@ nav a:hover {
 
 .btn-secondary {
     background-color: transparent;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     border: 1px solid var(--border-color);
 }
 

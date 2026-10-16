@@ -1,12 +1,17 @@
 {# templates/partials/_header.html.twig #}
 <header role="banner">
     <div class="container header-grid">
-        <!-- BLOC 1 : Le Logo -->
-        <div class="logo-block">
-            <span class="logo-title">{{ site_name|default('Solution Web') }}</span>
-            <span class="logo-slogan">{{ site_slogan|default('Performance & Excellence') }}</span>
-        </div>
-        
+        <!-- BLOC 1 : Le Logo (Structure NVH Studio) -->
+        <a href="{{ app.base_path }}/accueil" data-section="hero" class="logo-studio" aria-label="NVH Studio - Accueil">
+            <div class="logo-wrapper">
+                <div class="logo-text-row">
+                    <span class="logo-trigger">NVH</span>
+                    <span class="logo-sub">studio<span class="logo-star-exponent" title="L'Étoile des Mages (17)"></span></span>
+                </div>
+                <span class="logo-slogan">{{ site_slogan|default('Performance & Excellence') }}</span>
+            </div>
+        </a>
+
         <!-- BLOC 2 : Les Liens principaux (qui incluent le bouton burger) -->
         {% include 'partials/_nav.html.twig' %}
 
