@@ -469,34 +469,80 @@ nav a:hover {
    NVHFAST - CORE PREMIUM CSS VARIABLE SYSTEM (PRODUCTION CORE) - PARTIE 2
    ========================================================================== */
 
-/* --- Section Hero --- */
+/* ==========================================================================
+   NVHFAST - CONFIGURATION HERO COMPOSANT & CARD (PRODUCTION CORE)
+   ========================================================================== */
+
+.hero {
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-main);
+    /* 60% : Fond blanc pur du site */
+    padding: var(--space-sm) 0;
+}
+
 .hero .container {
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* 🌟 LA CARTE EN VERRE TRANSPARENTE (VERSION MINIMALISTE ÉPUREE) */
+.hero-card {
+    position: relative;
+    width: 100%;
+    padding: var(--space-xl) var(--space-md);
+    /* Donne du souffle en haut et en bas */
+    background-color: rgba(255, 255, 255, 0.75);
+    /* Verre translucide */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    /* Alignement parfait avec le design de ta capsule flottante du haut */
+    border: 1px solid rgba(33, 47, 61, 0.08);
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 40px rgba(33, 47, 61, 0.03);
+
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-.hero h1 {
-    font-size: clamp(2.1rem, 5vw, 3.6rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.1;
-    color: var(--text-primary);
-    max-width: 800px;
-    margin-bottom: var(--space-sm);
+/* Typographies et boutons forcés pour la lisibilité */
+.hero-card h1,
+.hero-card p,
+.hero-card .cta-group {
+    position: relative;
+    z-index: 2;
 }
 
-.hero p {
+.hero-card h1 {
+    font-size: clamp(2.1rem, 5vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+    /* 30% : Bleu-Gris acier */
+}
+
+.hero-card p {
     font-size: clamp(1rem, 2vw, 1.2rem);
     color: var(--text-secondary);
-    max-width: 650px;
+    /* 30% : Ardoise sombre */
+    max-width: 680px;
+    line-height: 1.6;
     margin-bottom: var(--space-md);
 }
 
 .cta-group {
     display: flex;
     gap: var(--space-sm);
+    align-items: center;
 }
 
 /* --- Boutons --- */
