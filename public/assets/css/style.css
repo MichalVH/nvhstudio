@@ -118,6 +118,15 @@ header[role="banner"] {
     transition: var(--transition-smooth);
 }
 
+/* 🌟 EFFET D'OPTIQUE : Quand le menu mobile est actif, le header fusionne vers le bas */
+header[role="banner"]:has(.menu-active) {
+    border-bottom-color: transparent;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: #032b35;
+    /* Devient opaque pour sceller la fusion */
+}
+
 .header-grid {
     display: flex;
     justify-content: space-between;
@@ -252,7 +261,7 @@ nav a.active {
 }
 
 /* ==========================================================================
-   NVHFAST - NAVBAR CONTACT : BOUTONS D'ACTION CIRCULAIRES
+   NVHFAST - NAVBAR CONTACT : BOUTONS D'ACTION CIRCULAIRES DESKTOP (MODERNE)
    ========================================================================== */
 .navbar-contact {
     display: flex;
@@ -264,10 +273,12 @@ nav a.active {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
+    width: 2.625rem;
+    /* Équivaut à 42px (Norme fluide) */
+    height: 2.625rem;
+    /* Force le cercle parfait accessible */
     border: 2px solid var(--text-primary);
+    border-radius: 25px;
     background-color: transparent;
     color: var(--text-primary);
     text-decoration: none;
@@ -275,16 +286,18 @@ nav a.active {
 }
 
 .btn-contact-circle svg {
-    width: 18px;
-    height: 18px;
+    width: 1.125rem;
+    /* Équivaut à 18px (Norme fluide) */
+    height: 1.125rem;
     transition: var(--transition-smooth);
 }
 
 .btn-contact-circle:hover {
     background-color: var(--bg-main);
     color: var(--color-brand);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.125rem);
+    /* Micro-lévitation fluide (2px) */
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
     border: 2px solid var(--color-brand);
 }
 
@@ -857,12 +870,10 @@ footer[role="contentinfo"] {
     }
 
     /* --- INFRASTRUCTURE NAVIGATION MOBILE & TIROIR BLINDÉ --- */
-
     .desktop-only {
         display: none !important;
     }
 
-    /* On utilise le même chaînage pour ouvrir le flux proprement sur mobile */
     .navbar-contact.mobile-only {
         display: flex;
         flex-direction: row;
@@ -870,8 +881,20 @@ footer[role="contentinfo"] {
         gap: var(--space-sm);
         width: 100%;
         padding-top: var(--space-md);
-        border-top: 1px solid var(--border-color);
         margin-top: var(--space-md);
+    }
+
+    .navbar-contact.mobile-only .btn-contact-circle {
+        width: 3rem;
+        /* Équivaut à 48px (3 x 16) */
+        height: 3rem;
+        /* Forme un cercle parfait et accessible */
+    }
+
+    .navbar-contact.mobile-only .btn-contact-circle svg {
+        width: 1.375rem;
+        /* Équivaut à 22px (22 / 16) */
+        height: 1.375rem;
     }
 
     header[role="banner"] .container {
@@ -882,19 +905,31 @@ footer[role="contentinfo"] {
         display: block;
     }
 
-    /* 1. Le Drawer global plein écran sous le header */
+    /* 1. Le Full Overlay immersif 100% hermétique (Zéro débordement du fond) */
     .menu-drawer {
         display: flex;
-        position: absolute;
-        top: var(--header-height);
+        position: fixed;
+
+        /* Fusionne pile sous le header */
+        top: calc(var(--header-height) + 1rem);
+
+        /* 🌟 FIX ULTIME : S'étale sur 100% de la largeur du téléphone pour bloquer l'arrière-plan */
         left: 0;
+        right: 0;
         width: 100%;
-        background-color: #ffffff;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+
+        background: var(--bg-dark);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         z-index: 9999;
         flex-direction: column;
         justify-content: space-between;
-        height: calc(100dvh - var(--header-height));
+        height: calc(100vh - var(--header-height) - 3rem);
+
+        /* TRANSFERT DE LA BORDURE ARGENTÉE TOUT EN BAS */
+        border-bottom: 2px solid var(--color-silver);
+        /* 🌟 Retrait des arrondis supérieurs pour une ligne latérale parfaitement étanche */
+        border-bottom-left-radius: var(--radius-md);
+        border-bottom-right-radius: var(--radius-md);
 
         opacity: 0;
         visibility: hidden;
@@ -904,59 +939,65 @@ footer[role="contentinfo"] {
             visibility 0.3s;
     }
 
-    /* 2. État activé par ton Menu.js */
+    /* 2. État activé piloté par Menu.js */
     .menu-drawer.menu-active {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
-        padding: var(--space-md) var(--space-md) calc(var(--space-md) + 20px) var(--space-md);
+        padding-top: var(--space-md);
+        padding-bottom: var(--space-md);
     }
 
-    /* 3. Centrage des liens et sécurité de défilement pour 10+ liens */
+    /* 3. Centrage et lisibilité des liens (Ligne parasite supprimée) */
     nav ul {
         display: flex;
         flex-direction: column;
         list-style: none;
-        gap: var(--space-md);
+        gap: var(--space-sm);
         width: 100%;
         margin-top: auto;
         margin-bottom: auto;
         text-align: center;
+        max-height: 50vh;
 
-        max-height: 55dvh;
+        /* 🌟 NETTOYAGE : On laisse le comportement de défilement naturel sans forcer de scrollbar visible */
         overflow-y: auto;
         padding: 0 var(--space-xs);
         -webkit-overflow-scrolling: touch;
-
-        /* FORCE LA SCROLLBAR VISIBLE À 100% */
-        scrollbar-width: thin !important;
-        scrollbar-color: var(--border-color) transparent !important;
+        scrollbar-width: none;
+        /* Masque sur Firefox */
     }
 
-    /* Spécification de la scrollbar permanente sur mobile */
+    /* 🌟 ON SUPPRIME COMPLÈTEMENT LES SECTEURS WEBKIT-SCROLLBAR QUI CRÉAIENT LE TRAIT */
     nav ul::-webkit-scrollbar {
-        width: 6px !important;
-        display: block !important;
-    }
-
-    nav ul::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.03) !important;
-        border-radius: var(--radius-sm);
+        display: none !important;
+        /* Masque sur Chrome/Safari/Edge */
     }
 
     nav ul::-webkit-scrollbar-thumb {
-        background-color: var(--border-color) !important;
+        background-color: rgba(255, 255, 255, 0.2) !important;
         border-radius: var(--radius-sm) !important;
-        border: 1px solid #ffffff !important;
     }
 
+    /* Liens harmonisés pour le thème sombre */
     nav a {
         display: block;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        /* Rendu éclatant sur fond sombre */
         padding: var(--space-sm) 0;
+        text-decoration: none;
+        transition: var(--transition-smooth);
     }
 
-    /* 4. Gestion du bouton Burger positionné à droite */
+    nav a:hover,
+    nav a.active {
+        color: var(--color-brand);
+        transform: scale(1.03);
+    }
+
+    /* 4. Le bouton Burger mobile */
     .burger-trigger {
         display: flex !important;
         flex-direction: column;
@@ -975,25 +1016,6 @@ footer[role="contentinfo"] {
         height: 2px;
         background-color: var(--text-primary);
         border-radius: 2px;
-    }
-
-    /* --- RÉALIGNEMENT DU SOUS-MENU UNIVERSEL SUR MOBILE --- */
-    /* Mets à jour ton bloc existant avec cette propriété supplémentaire : */
-    .dropdown-menu {
-        position: static;
-        left: auto;
-        /* 🌟 SÉCURITÉ : Annule le décalage de 50% du Desktop */
-        width: 100%;
-        box-shadow: none;
-        border: none;
-        background-color: var(--bg-surface-alt);
-        padding: var(--space-xs) 0;
-        margin: var(--space-xs) 0;
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        visibility: hidden;
-        transition: max-height 0.35s ease-out, opacity 0.3s ease;
     }
 
     /* Activation fluide du sous-menu mobile au clic */
