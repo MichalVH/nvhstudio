@@ -1,67 +1,51 @@
 /* ==========================================================================
-   NVHFAST - CORE PREMIUM CSS VARIABLE SYSTEM (PRODUCTION CORE) - PARTIE 1
+   NVHFAST - CORE PREMIUM CSS VARIABLE SYSTEM (PRODUCTION CORE)
    ========================================================================== */
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
-    /* La police variable encaisse toutes les graisses de 100 à 900 en un seul fichier */
     font-weight: 100 900;
     font-display: swap;
-    /* Le chemin remonte d'un niveau (../) pour sortir de /css et aller chercher /fonts */
     src: url('../fonts/Montserrat-variable.woff2') format('woff2-variations'),
         url('../fonts/Montserrat-variable.woff2') format('woff2');
 }
 
 :root {
-    /* ==========================================================================
-       60% : DOMINANTE (Fonds épurés, modernes & ultra-rapides)
-       ========================================================================== */
-    --bg-main: #f4f5f7;
-    /* Blanc pur pour l'aspect net et la vitesse visuelle */
-    --bg-surface: #f8f9fa;
-    /* Gris très clair pour casser la monotonie des sections paires */
-    --bg-surface-alt: #ffffff;
-    /* Gris-bleu subtil pour les survols neutres et les wireframes */
-
-    /* Effet matière premium 100% CSS (Marbrures et velours bleu canard sans image) */
+    /* --- 60% : DOMINANTE THÈME SOMBRE (Fonds & Surfaces) --- */
     --bg-dark: radial-gradient(circle at 20% 30%, rgba(2, 72, 85, 0.8) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(3, 43, 53, 0.9) 0%, transparent 40%),
         radial-gradient(circle at 40% 80%, rgba(1, 35, 42, 0.7) 0%, transparent 60%),
         radial-gradient(circle at 85% 85%, rgba(4, 90, 105, 0.5) 0%, transparent 50%),
         #032b35;
 
-    /* Ta teinte de fond solide en sécurité absolue */
-    --border-color: #d1d5db;
-    /* Gris universel doux pour des bordures discrètes */
+    --bg-main: #032b35;
+    --bg-surface: #f4f5f7;
+    --bg-surface-alt: #ffffff;
 
-    /* ==========================================================================
-       30% : IDENTITÉ DE MARQUE (Typographies Acier - Contraste AAA)
-       ========================================================================== */
+    /* --- 30% : IDENTITÉ DE MARQUE & TYPOGRAPHIES (Contraste AAA) --- */
     --text-primary: #f8f9fa;
-    /* H1, H2, H3 : Bleu-Gris acier (Ratio élite 13.6:1) */
+    /* Blanc-Gris acier pour fond sombre */
     --text-secondary: #1c2833;
-    /* Paragraphes : Ardoise sombre ultra-lisible (Ratio 15.3:1) */
+    /* Ardoise sombre pour les textes sur fonds clairs */
     --text-muted: #5d6d7e;
-    /* Textes secondaires : Ajusté pour valider le ratio WCAG à 4.7:1 */
+    /* Gris intermédiaire secondaire */
+    --border-color: #d1d5db;
 
-    /* ==========================================================================
-       10% : ACCENT / ACTION (Turquoise Lumineux Sécurisé)
-       ========================================================================== */
+    /* --- 10% : ACCENT / ACTION (Turquoise Lumineux & Métal) --- */
     --color-brand: #00a3b4;
-    /* Turquoise de marque pour les liens et micro-accents */
+    /* Turquoise NVH Studio */
     --color-accent: #212f3d;
-    /* Fond du bouton principal (Ardoise pour contraste max) */
+    /* Ardoise sombre */
     --color-accent-hover: #00b4d8;
-    /* Survol du bouton principal (Effet turquoise électrique) */
-
-    /* 🌟 NOUVELLE COULEUR : Gris très clair argenté premium pour les dégradés */
+    /* Turquoise électrique */
     --color-silver: #e2e8f0;
+    /* Argent premium */
 
-    /* ==========================================================================
-       INFRASTRUCTURE & CONFIGURATION NVHFAST
-       ========================================================================== */
+    /* --- INFRASTRUCTURE & CONFIGURATION --- */
     --header-height: 80px;
+    --container-max-width: 1300px;
     --font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-logo: "Montserrat", var(--font-system);
 
     --space-xs: 0.5rem;
     --space-sm: 1rem;
@@ -69,16 +53,15 @@
     --space-lg: 4rem;
     --space-xl: 6rem;
 
+    --radius-xs: 4px;
     --radius-sm: 6px;
     --radius-md: 12px;
     --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    --container-max-width: 1300px;
-
-    /* Intégration de ton fichier variable Montserrat pour le branding textuel */
-    --font-logo: "Montserrat", var(--font-system);
 }
 
-/* --- Reset Fondations --- */
+/* ==========================================================================
+   RESET FONCTIONS & SÉCURITÉS APPAREILS
+   ========================================================================== */
 *,
 *::before,
 *::after {
@@ -98,12 +81,7 @@ html {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-
-    /* FIX ANCHOR BUG : Empêche les titres de glisser sous la barre fixe */
-    scroll-padding-top: calc(var(--header-height) + 1rem + 0.5rem);
-
-    /* SUPPORT DU SCROLL SNAP MOBILE (Actif uniquement si déclenché par les media queries) */
-    /* scroll-snap-type: y proximity; */
+    scroll-padding-top: calc(var(--header-height) + 1.5rem);
 }
 
 body {
@@ -117,86 +95,44 @@ main {
     width: 100%;
 }
 
-/* --- Spans --- */
-.text-highlight {
-    color: var(--color-brand);
-    font-family: var(--font-system);
-}
-
-.subtitle {
-    /* color: var(--text-muted); */
-    display: inline-block;
-    font-size: clamp(2.6rem, 5.5vw, 2.2rem);
-    line-height: 0.9;
-}
-
-/* --- Conteneur Universel --- */
-.container {
-    width: 100%;
-    max-width: var(--container-max-width);
-    margin-right: auto;
-    margin-left: auto;
-    /* padding-right: var(--space-md);
-    padding-left: var(--space-md); */
-}
-
-/* --- Bloc Section Plein Écran Universel (Effet Immersif Desktop) --- */
-section {
-    width: 100%;
-    height: calc(100vh - var(--header-height));
-    /* min-height: calc(100vh - 70px); */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-sm) 0;
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-}
-
-/* section:nth-child(even) {
-    background-color: var(--bg-surface);
-} */
-
 /* ==========================================================================
-   NVHFAST - HEADER COMPOSANT FLOTTANT HAUT DE GAMME (STANDARDS COCOON UI)
+   NVHFAST - HEADER COMPOSANT FLOTTANT HAUT DE GAMME
    ========================================================================== */
-
 header[role="banner"] {
     position: sticky;
     top: 1rem;
-    /* Décolle le header du haut de l'écran pour l'effet flottant */
     z-index: 100;
     width: calc(100% - 2rem);
-    /* Laisse de l'espace à gauche et à droite */
     max-width: var(--container-max-width);
-    /* S'aligne sur la largeur utile du site (1200px) */
     height: var(--header-height);
     margin-right: auto;
     margin-left: auto;
     padding-right: var(--space-md);
     padding-left: var(--space-md);
-
-    /* 60% : Fond effet verre fumé blanc pur translucide */
-    background-color: var(--bg-dark);
+    background-color: rgba(3, 43, 53, 0.85);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    /* Sécurité Apple */
-
-    /* RAPPEL DE MARQUE ÉLITE : Bordures latérales et haute très discrètes... */
-    /* border: 1px solid #f9da89; */
-    /* ... et ligne de lumière turquoise subtile uniquement sur le bord inférieur */
     border-bottom: 2px solid var(--color-silver);
-
-    /* Contour ardoise ultra-subtile */
     border-radius: var(--radius-md);
-
-    /* Ombre portée douce pour détacher la capsule au scroll */
     box-shadow: 0 4px 30px rgba(33, 47, 61, 0.04);
-
     transition: var(--transition-smooth);
 }
 
-/* EXTENSION COMPORTEMENT MOBILE & TACTILE ACCÉLÉRÉ (FIX GPU INTERNE) */
+.header-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+header[role="banner"] .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
 @media (pointer: coarse) {
     header[role="banner"] {
         position: fixed !important;
@@ -206,33 +142,14 @@ header[role="banner"] {
         width: calc(100% - 2rem);
     }
 
-    /* Sécurité de flux augmentée sur le body pour compenser l'espace flottant */
     body {
         padding-top: calc(var(--header-height) + 1.5rem);
     }
 }
 
-.header-grid {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    /* S'aligne sur la hauteur du parent */
-}
-
-header[role="banner"] .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    /* 🌟 FIX DIRECT : Prend 100% des 90px du parent sans forcer sa propre hauteur */
-}
-
 /* ==========================================================================
-   NVHFAST - IDENTITY SYSTEM (NVH STUDIO SILVERS-GRADIENT LOGO CORE)
+   NVHFAST - IDENTITY SYSTEM (NVH STUDIO SILVERS-GRADIENT LOGO)
    ========================================================================== */
-
 a.logo-studio {
     display: flex;
     align-items: center;
@@ -248,15 +165,12 @@ a.logo-studio {
     gap: 0.6rem;
     font-family: var(--font-logo);
     line-height: 1;
-
-    /* 🌟 LE NOUVEAU DÉGRADÉ : Effet lumière de l'étoile (Argenté -> Turquoise de marque) */
     background: linear-gradient(to left, var(--color-silver) 0%, var(--color-brand) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* Le trigramme massif (qui prendra la nuance argentée) */
 .logo-trigramme {
     font-size: 2.6rem;
     font-weight: 900;
@@ -264,7 +178,6 @@ a.logo-studio {
     text-transform: uppercase;
 }
 
-/* Le qualificatif (qui fusionnera vers le turquoise de l'étoile) */
 .logo-qualifier {
     position: relative;
     font-size: 1.4rem;
@@ -274,7 +187,6 @@ a.logo-studio {
     padding-right: 18px;
 }
 
-/* --- MOTEUR DE L'ÉTOILE DES MAGES SCINTILLANTE --- */
 .star-sparkle {
     position: absolute;
     top: -8px;
@@ -303,8 +215,9 @@ a.logo-studio {
     }
 }
 
-/* --- Navigation Desktop par défaut --- */
-/* On enchaîne les deux classes pour gagner en spécificité sans !important */
+/* ==========================================================================
+   NVHFAST - NAVIGATION DESKTOP DEFAULT
+   ========================================================================== */
 .navbar-contact.mobile-only {
     display: none;
 }
@@ -329,27 +242,24 @@ nav a {
     transition: var(--transition-smooth);
 }
 
-nav a:hover {
+nav a:hover,
+nav a.active {
     color: var(--color-brand);
 }
 
 .burger-trigger {
     display: none;
-    /* Masqué sur ordinateur */
 }
 
 /* ==========================================================================
-   NVHFAST - NAVBAR CONTACT : BOUTONS D'ACTION CIRCULAIRES PREMIUM
+   NVHFAST - NAVBAR CONTACT : BOUTONS D'ACTION CIRCULAIRES
    ========================================================================== */
-
 .navbar-contact {
     display: flex;
     gap: var(--space-xs);
-    /* 0.5rem d'espace entre les cercles */
     align-items: center;
 }
 
-/* Base universelle des boutons ronds */
 .btn-contact-circle {
     display: inline-flex;
     align-items: center;
@@ -357,111 +267,72 @@ nav a:hover {
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    /* Force la forme géométrique d'un cercle parfait */
     border: 2px solid var(--text-primary);
-    /* Ta bordure d'origine */
     background-color: transparent;
     color: var(--text-primary);
-    /* Couleur initiale de l'icône */
     text-decoration: none;
     transition: var(--transition-smooth);
 }
 
-/* Gestion du calibrage de la taille des icônes SVG à l'intérieur du cercle */
 .btn-contact-circle svg {
     width: 18px;
     height: 18px;
     transition: var(--transition-smooth);
 }
 
-/* --- Effets au Survol Élite (Desktop) --- */
 .btn-contact-circle:hover {
-    background-color: var(--bg-dark);
-    /* Passe sur ton fond noir de marque */
-    /* border-color: var(--color-accent); */
+    background-color: var(--bg-main);
     color: var(--color-brand);
-    /* L'icône vire au blanc pur */
     transform: translateY(-2px);
-    /* Micro-effet de lévitation UX haut de gamme */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border: 2px solid var(--color-brand);
 }
 
 /* ==========================================================================
-   NVHFAST - SYSTÈME DROPDOWN DESKTOP ÉVOLUTIF (100% CSS NATIF)
+   ⚠️ OPTIONNEL / COMMENTÉ : SYSTÈME DROPDOWN
+   ========================================================================== 
+.dropdown-parent { position: relative; }
+.dropdown-trigger .arrow { font-size: 1.1rem; margin-left: 6px; display: inline-block; transition: var(--transition-smooth); transform: rotate(0deg); vertical-align: middle; position: relative; top: -2px; }
+.dropdown-menu { display: flex; flex-direction: column; gap: 0; position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(10px); min-width: 200px; background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); padding: var(--space-xs) 0; z-index: 1000; opacity: 0; visibility: hidden; transition: var(--transition-smooth); }
+.dropdown-menu.open { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.dropdown-trigger.arrow-rotated .arrow { transform: rotate(90deg); }
+.dropdown-menu li { width: 100%; }
+.dropdown-menu a { display: block; padding: 0.6rem var(--space-sm); font-size: 0.9rem; color: var(--text-secondary); text-align: left; white-space: nowrap; }
+.dropdown-menu a:hover { background-color: var(--bg-surface-alt); color: var(--color-brand); }
+========================================================================== */
+
+/* ==========================================================================
+   NVHFAST - TYPOGRAPHIES ET SQUELETTE DE BASE
    ========================================================================== */
-
-/* On donne une position relative au parent pour que le sous-menu s'ancre en dessous */
-.dropdown-parent {
-    position: relative;
-}
-
-.dropdown-trigger .arrow {
-    font-size: 1.1rem;
-    margin-left: 6px;
-    display: inline-block;
-    transition: var(--transition-smooth);
-    transform: rotate(0deg);
-    vertical-align: middle;
-    position: relative;
-    top: -2px;
-}
-
-/* 1. ÉTAT CACHÉ PAR DÉFAUT DU SOUS-MENU */
-.dropdown-menu {
-    display: flex;
-    /* Aligne les éléments à l'intérieur */
-    flex-direction: column;
-    gap: 0;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    min-width: 200px;
-    background-color: var(--bg-main);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    padding: var(--space-xs) 0;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition-smooth);
-}
-
-/* 🌟 NOUVEAU STANDARD UNIVERSEL AU CLIC (DESKTOP / SURFACE) */
-.dropdown-menu.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-    /* Le menu remonte proprement */
-}
-
-.dropdown-trigger.arrow-rotated .arrow {
-    transform: rotate(90deg);
-    /* La flèche pivote de 90° et pointe vers le bas */
-}
-
-.dropdown-menu li {
+.container {
     width: 100%;
+    max-width: var(--container-max-width);
+    margin-right: auto;
+    margin-left: auto;
 }
 
-.dropdown-menu a {
-    display: block;
-    padding: 0.6rem var(--space-sm);
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    text-align: left;
-    white-space: nowrap;
-    /* Empêche le texte de sauter à la ligne */
+section {
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm) 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
 }
 
-.dropdown-menu a:hover {
-    background-color: var(--bg-surface-alt);
+.text-highlight {
     color: var(--color-brand);
+    font-family: var(--font-system);
 }
 
-/* --- Typographies --- */
+.subtitle {
+    display: inline-block;
+    font-size: clamp(2.2rem, 5.5vw, 2.6rem);
+    line-height: 0.9;
+}
+
 .section-title {
     text-align: center;
     font-size: clamp(1.6rem, 4vw, 2.2rem);
@@ -481,50 +352,34 @@ nav a:hover {
 }
 
 /* ==========================================================================
-   NVHFAST - CORE PREMIUM CSS VARIABLE SYSTEM (PRODUCTION CORE) - PARTIE 2
+   NVHFAST - COMPOSANT HERO & COMPOSITION CARD
    ========================================================================== */
-
-/* ==========================================================================
-   NVHFAST - CONFIGURATION HERO COMPOSANT & CARD (PRODUCTION CORE)
-   ========================================================================== */
-
 .hero {
     width: calc(100% - 2rem);
     max-width: var(--container-max-width);
     height: calc(100vh - var(--header-height));
-    /* min-height: calc(100vh - 70px); */
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: auto;
     margin-left: auto;
-    /* padding: var(--space-sm) 0; */
 }
 
 .hero .container {
-    max-width: var(--container-max-width);
-    width: calc(100% - 2rem);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 0px solid var(--border-color);
-    border-radius: var(--radius-md);
+    align-items: center;
 }
 
-/* ==========================================================================
-   NVHFAST - CONFIGURATION HERO CARTE CENTRÉE PROPORTIONNELLE CORE RESTORED)
-   ========================================================================== */
-
-/* La carte centrale restreinte pour cadrer idéalement votre titre sur 2 lignes */
 .hero-card {
-    /* background: var(--bg-surface-alt); */
     min-height: 100%;
     width: 60%;
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
     justify-content: center;
-    color: var(--bg-surface-alt);
+    color: var(--text-primary);
     padding: var(--space-md);
     margin-right: var(--space-lg);
 }
@@ -538,152 +393,83 @@ nav a:hover {
     margin-bottom: 0.5rem;
 }
 
-/* Adoucir le sous-titre pour créer la hiérarchie */
-.hero-card .subtitle {
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    /* Plus petit que le H1 */
-    font-weight: 600;
-    /* Légèrement moins épais */
-    display: block;
-    /* Force le retour à la ligne proprement */
-}
-
-/* Rendre le paragraphe plus lisible */
 .hero-description {
-    width: 80%;
+    width: 85%;
     line-height: 1.65;
     font-family: var(--font-system);
     font-size: 1.25rem;
+    color: rgba(248, 249, 250, 0.9);
 }
 
-/* Le bouton principal turquoise calibré précisément à la moitié de la carte */
+.hero-action-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* 🌟 CORRECTIF BOUTON XL TURQUOISE DÉFINITIF */
 .btn-hero-xl {
+    display: inline-block;
     width: 80%;
-    /* min-width: 100%;  */
-    text-align: left;
-    /* Sécurité visuelle */
-    padding: 1.1rem 2rem !important;
-    font-size: 1.05rem !important;
-    font-weight: 700 !important;
+    text-align: center;
+    padding: 1.1rem 2rem;
+    font-size: 1.05rem;
+    font-weight: 700;
     background-color: var(--color-brand) !important;
     color: var(--text-primary) !important;
     text-transform: uppercase;
-    border: 2px solid var(--bg-dark);
-    border-radius: var(--radius-xs) !important;
-    box-shadow: 0 5px 30px rgba(0, 163, 180, 0.1);
+    text-decoration: none;
+    border: 2px solid var(--bg-main);
+    border-radius: var(--radius-xs);
+    box-shadow: 0 5px 30px rgba(0, 163, 180, 0.2);
     transition: var(--transition-smooth);
+    cursor: pointer;
 }
 
 .btn-hero-xl:hover {
     background-color: var(--text-primary) !important;
     color: var(--color-brand) !important;
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 180, 216, 0.15);
+    box-shadow: 0 10px 20px rgba(0, 180, 216, 0.3);
 }
 
-.valors-list {
-    width: 50%;
-    min-height: 100%;
-    /* overflow: hidden; */
-    margin-left: var(--space-lg);
-}
-
-.valors-list img {
-    height: 100%;
-    width: 100%;
-    /* On agrandit légèrement l'image */
-    object-fit: contain;
-    object-position: center;
-    /* Masque de dégradé pour adoucir les contours */
-    mask-image: radial-gradient(circle, black 60%, transparent 100%);
-    -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
-}
-
-.hero-card .hero-trust-line {
-    margin-top: var(--space-sm);
-    font-size: 0.82rem;
-    color: var(--bg-surface-alt);
+/* Ligne de réassurance technique unifiée */
+.hero-trust-line {
+    width: 80%;
+    font-size: 0.85rem;
+    color: rgba(248, 249, 250, 0.75);
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     letter-spacing: 0.03em;
+    margin-top: var(--space-xs);
 }
 
-/* --- NEW Micro Badge Hero --- */
-.hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    background-color: rgba(0, 163, 180, 0.08);
-    /* Version ultra-douce de ta marque */
-    border: 1px solid rgba(0, 163, 180, 0.2);
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    margin-bottom: var(--space-sm);
-}
-
-.hero-star-icon,
 .mini-star {
     display: inline-block;
     width: 10px;
     height: 10px;
-    background-color: var(--bg-surface-alt);
+    background-color: var(--color-brand);
     clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
 }
 
-/* --- NEW Ligne de réassurance --- */
-.hero-trust-line {
-    width: 80%;
-    font-size: 0.85rem;
-    color: var(--bg-surface-alt);
+.valors-list {
+    width: 40%;
+    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    letter-spacing: 0.03em;
-    margin-top: var(--space-sm);
 }
 
-/* Typographies et boutons forcés pour la lisibilité */
-
-.cta-group {
-    display: flex;
-    gap: var(--space-sm);
-    align-items: center;
-    text-align: center;
-}
-
-/* --- Boutons --- */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border-radius: var(--radius-sm);
-    text-decoration: none;
-    transition: var(--transition-smooth);
-    cursor: pointer;
-}
-
-.btn-primary {
-    background-color: var(--color-accent);
-    color: var(--bg-main);
-}
-
-.btn-primary:hover {
-    background-color: var(--color-accent-hover);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-    background-color: var(--bg-surface-alt);
+.valors-list img {
+    height: auto;
+    width: 100%;
+    max-width: 450px;
+    object-fit: contain;
+    object-position: center;
+    mask-image: radial-gradient(circle, black 60%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
 }
 
 /* --- Grille de Services --- */
