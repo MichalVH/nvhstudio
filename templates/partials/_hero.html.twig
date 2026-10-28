@@ -1,14 +1,32 @@
 {# templates/partials/_hero.html.twig #}
 <section id="hero" class="hero">
     <div class="container">
-        <!-- 🌟 LA DIV MANQUANTE : La carte immersive qui va intercepter le style CSS -->
+        <!-- PARTIE GAUCHE - Boîte de composition interne épurée -->
         <div class="hero-card">
-            <h1>Votre site web réalisé sur mesure, votre temps reste dédié à votre Métier</h1>
-            <p>Déployez une présence en ligne prenium, ultra-sécurisée, performante et éco-conçue. De la technique aux démarches administratives, je gère tout pour vous offrir une solution clés en main en toute sérénité.</p>
-            <div class="cta-group">
-                <a href="{{ app.base_path }}/contact" data-section="contact" class="btn btn-primary">Démarrer votre projet</a>
-                <a href="{{ app.base_path }}/services" data-section="services" class="btn btn-secondary">Découvrir mes services</a>
+            
+            <!-- Conteneur textuel pour structurer la hiérarchie -->
+            <div class="hero-header-text">
+                <h1>Votre site web sur mesure et éco-conçu</h1>
             </div>
+
+            <!-- Texte accueil avec un point final pour l'accessibilité -->
+            <p class="hero-description">NVH Studio crée des sites internet d'excellence, ultra-rapides et sécurisés, spécifiquement pensés pour le quotidien des professionnels libéraux de la santé. Gagnez en visibilité auprès de vos patients sans perdre une minute de votre temps médical.</p>
+            
+            <!-- Zone d'action réalignée -->
+            <div class="hero-action-block">
+                <a href="{{ app.base_path }}/contact" data-section="contact" class="btn btn-primary btn-hero-xl">
+                    Démarrer votre projet
+                </a>
+                <!-- Réassurance technique -->
+                <div class="hero-trust-line">
+                    <span class="mini-star"></span> Performance absolue & Excellence technique <span class="mini-star"></span>
+                </div>
+            </div>
+        </div>
+
+        {# PARTIE DROITE - Illustration #}
+        <div class="valors-list">
+            <img src="{{ app.base_path }}/assets/img/hero_illustration-vf.avif" alt="Nos 3 piliers techniques : Sécurité, Rapidité, Éco-conception" width="450" height="450" loading="eager">
         </div>
     </div>
 </section>

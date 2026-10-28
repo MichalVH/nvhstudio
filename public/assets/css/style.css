@@ -1,24 +1,43 @@
 /* ==========================================================================
    NVHFAST - CORE PREMIUM CSS VARIABLE SYSTEM (PRODUCTION CORE) - PARTIE 1
    ========================================================================== */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    /* La police variable encaisse toutes les graisses de 100 à 900 en un seul fichier */
+    font-weight: 100 900;
+    font-display: swap;
+    /* Le chemin remonte d'un niveau (../) pour sortir de /css et aller chercher /fonts */
+    src: url('../fonts/Montserrat-variable.woff2') format('woff2-variations'),
+        url('../fonts/Montserrat-variable.woff2') format('woff2');
+}
 
 :root {
     /* ==========================================================================
        60% : DOMINANTE (Fonds épurés, modernes & ultra-rapides)
        ========================================================================== */
-    --bg-main: #ffffff;
+    --bg-main: #f4f5f7;
     /* Blanc pur pour l'aspect net et la vitesse visuelle */
     --bg-surface: #f8f9fa;
     /* Gris très clair pour casser la monotonie des sections paires */
-    --bg-surface-alt: #f1f5f9;
+    --bg-surface-alt: #ffffff;
     /* Gris-bleu subtil pour les survols neutres et les wireframes */
+
+    /* Effet matière premium 100% CSS (Marbrures et velours bleu canard sans image) */
+    --bg-dark: radial-gradient(circle at 20% 30%, rgba(2, 72, 85, 0.8) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(3, 43, 53, 0.9) 0%, transparent 40%),
+        radial-gradient(circle at 40% 80%, rgba(1, 35, 42, 0.7) 0%, transparent 60%),
+        radial-gradient(circle at 85% 85%, rgba(4, 90, 105, 0.5) 0%, transparent 50%),
+        #032b35;
+
+    /* Ta teinte de fond solide en sécurité absolue */
     --border-color: #d1d5db;
     /* Gris universel doux pour des bordures discrètes */
 
     /* ==========================================================================
        30% : IDENTITÉ DE MARQUE (Typographies Acier - Contraste AAA)
        ========================================================================== */
-    --text-primary: #212f3d;
+    --text-primary: #f8f9fa;
     /* H1, H2, H3 : Bleu-Gris acier (Ratio élite 13.6:1) */
     --text-secondary: #1c2833;
     /* Paragraphes : Ardoise sombre ultra-lisible (Ratio 15.3:1) */
@@ -35,10 +54,13 @@
     --color-accent-hover: #00b4d8;
     /* Survol du bouton principal (Effet turquoise électrique) */
 
+    /* 🌟 NOUVELLE COULEUR : Gris très clair argenté premium pour les dégradés */
+    --color-silver: #e2e8f0;
+
     /* ==========================================================================
        INFRASTRUCTURE & CONFIGURATION NVHFAST
        ========================================================================== */
-    --header-height: 90px;
+    --header-height: 80px;
     --font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
     --space-xs: 0.5rem;
@@ -50,7 +72,10 @@
     --radius-sm: 6px;
     --radius-md: 12px;
     --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    --container-max-width: 1200px;
+    --container-max-width: 1300px;
+
+    /* Intégration de ton fichier variable Montserrat pour le branding textuel */
+    --font-logo: "Montserrat", var(--font-system);
 }
 
 /* --- Reset Fondations --- */
@@ -66,8 +91,8 @@ html {
     font-family: var(--font-system);
     font-size: 16px;
     line-height: 1.5;
-    color: var(--text-secondary);
-    background-color: var(--bg-main);
+    color: var(--text-primary);
+    background: var(--bg-dark);
     scroll-behavior: auto;
     -webkit-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
@@ -92,21 +117,34 @@ main {
     width: 100%;
 }
 
+/* --- Spans --- */
+.text-highlight {
+    color: var(--color-brand);
+    font-family: var(--font-system);
+}
+
+.subtitle {
+    /* color: var(--text-muted); */
+    display: inline-block;
+    font-size: clamp(2.6rem, 5.5vw, 2.2rem);
+    line-height: 0.9;
+}
+
 /* --- Conteneur Universel --- */
 .container {
     width: 100%;
     max-width: var(--container-max-width);
     margin-right: auto;
     margin-left: auto;
-    padding-right: var(--space-md);
-    padding-left: var(--space-md);
+    /* padding-right: var(--space-md);
+    padding-left: var(--space-md); */
 }
 
 /* --- Bloc Section Plein Écran Universel (Effet Immersif Desktop) --- */
 section {
     width: 100%;
     height: calc(100vh - var(--header-height));
-    min-height: calc(100vh - 70px);
+    /* min-height: calc(100vh - 70px); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -115,9 +153,9 @@ section {
     scroll-snap-stop: normal;
 }
 
-section:nth-child(even) {
+/* section:nth-child(even) {
     background-color: var(--bg-surface);
-}
+} */
 
 /* ==========================================================================
    NVHFAST - HEADER COMPOSANT FLOTTANT HAUT DE GAMME (STANDARDS COCOON UI)
@@ -135,17 +173,19 @@ header[role="banner"] {
     height: var(--header-height);
     margin-right: auto;
     margin-left: auto;
+    padding-right: var(--space-md);
+    padding-left: var(--space-md);
 
     /* 60% : Fond effet verre fumé blanc pur translucide */
-    background-color: rgba(255, 255, 255, 0.80);
+    background-color: var(--bg-dark);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     /* Sécurité Apple */
 
     /* RAPPEL DE MARQUE ÉLITE : Bordures latérales et haute très discrètes... */
-    border: 1px solid rgba(33, 47, 61, 0.08);
+    /* border: 1px solid #f9da89; */
     /* ... et ligne de lumière turquoise subtile uniquement sur le bord inférieur */
-    border-bottom: 2px solid var(--color-brand);
+    border-bottom: 2px solid var(--color-silver);
 
     /* Contour ardoise ultra-subtile */
     border-radius: var(--radius-md);
@@ -190,106 +230,80 @@ header[role="banner"] .container {
 }
 
 /* ==========================================================================
-   NVHFAST - IDENTITY SYSTEM (NVH STUDIO LOGO CORE)
+   NVHFAST - IDENTITY SYSTEM (NVH STUDIO SILVERS-GRADIENT LOGO CORE)
    ========================================================================== */
 
-.logo-studio {
-    display: inline-flex;
+a.logo-studio {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: auto;
     text-decoration: none;
-    color: var(--text-primary);
-    /* Bleu-Gris acier */
-    transition: var(--transition-smooth);
 }
 
-.logo-studio:hover {
-    opacity: 0.95;
-}
-
-.logo-wrapper {
+.logo-text-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.logo-text-row {
-    display: flex;
+    flex-direction: row;
     align-items: baseline;
+    gap: 0.6rem;
+    font-family: var(--font-logo);
     line-height: 1;
+
+    /* 🌟 LE NOUVEAU DÉGRADÉ : Effet lumière de l'étoile (Argenté -> Turquoise de marque) */
+    background: linear-gradient(to left, var(--color-silver) 0%, var(--color-brand) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* Le Trigramme NVH : Massif, fixe et géométrique avec une police native */
-.logo-studio .logo-trigger {
-    font-family: var(--font-system);
-    font-size: 1.6rem;
-    font-weight: 800;
-    letter-spacing: -0.05em;
+/* Le trigramme massif (qui prendra la nuance argentée) */
+.logo-trigramme {
+    font-size: 2.6rem;
+    font-weight: 900;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: var(--text-primary);
-    /* Bleu-Gris acier */
-    line-height: 1;
 }
 
-/* Le mot 'studio' */
-.logo-studio .logo-sub {
-    font-family: var(--font-system);
-    font-size: 1.35rem;
-    font-weight: 300;
-    letter-spacing: -0.02em;
-    color: var(--text-muted);
-    /* Gris-Bleu adouci pour la hiérarchie visuelle */
-    text-transform: lowercase;
-    margin-left: 0.25rem;
+/* Le qualificatif (qui fusionnera vers le turquoise de l'étoile) */
+.logo-qualifier {
     position: relative;
-    display: inline-flex;
-    align-items: baseline;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: -0.05em;
+    text-transform: lowercase;
+    padding-right: 18px;
 }
 
-/* L'Étoile en Exposant (17) : Géométrie pure via clip-path vectoriel */
-.logo-studio .logo-star-exponent {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: var(--color-brand);
-    /* Ton turquoise de marque */
-    margin-left: 0.15rem;
-    align-self: flex-start;
-    transform: translateY(-4px);
-    clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
-    animation: starContinuousShimmer 4s infinite ease-in-out;
+/* --- MOTEUR DE L'ÉTOILE DES MAGES SCINTILLANTE --- */
+.star-sparkle {
+    position: absolute;
+    top: -8px;
+    right: -2px;
+    width: 18px;
+    height: 18px;
+    -webkit-text-fill-color: initial;
+    animation: sparkle-glow 2.5s ease-in-out infinite;
 }
 
-/* Le Slogan */
-.logo-studio .logo-slogan {
-    font-family: var(--font-system);
-    font-size: 0.70rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    color: var(--text-muted);
-    /* Gris-Bleu adouci */
-    margin-top: 0.25rem;
-    text-transform: uppercase;
-}
-
-/* --- LOGO ENGINE ANIMATION (GPU ACCELERATED) --- */
-@keyframes starContinuousShimmer {
+@keyframes sparkle-glow {
 
     0%,
     100% {
-        opacity: 1;
-        transform: translateY(-4px) scale(1);
+        fill: var(--color-brand);
+        transform: scale(0.8) rotate(0deg);
+        filter: drop-shadow(0 0 2px var(--color-brand));
+        opacity: 0.7;
     }
 
     50% {
-        opacity: 0.6;
-        transform: translateY(-4px) scale(1.2);
-        /* Pulsation sur l'étoile */
-        background-color: var(--color-accent-hover);
-        /* Aligné sur ton turquoise électrique */
+        fill: var(--color-accent-hover);
+        transform: scale(1.15) rotate(15deg);
+        filter: drop-shadow(0 0 6px var(--color-accent-hover));
+        opacity: 1;
     }
 }
 
 /* --- Navigation Desktop par défaut --- */
-
 /* On enchaîne les deux classes pour gagner en spécificité sans !important */
 .navbar-contact.mobile-only {
     display: none;
@@ -308,7 +322,7 @@ nav ul {
 }
 
 nav a {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
@@ -344,10 +358,10 @@ nav a:hover {
     height: 42px;
     border-radius: 50%;
     /* Force la forme géométrique d'un cercle parfait */
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--text-primary);
     /* Ta bordure d'origine */
     background-color: transparent;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     /* Couleur initiale de l'icône */
     text-decoration: none;
     transition: var(--transition-smooth);
@@ -362,14 +376,15 @@ nav a:hover {
 
 /* --- Effets au Survol Élite (Desktop) --- */
 .btn-contact-circle:hover {
-    background-color: var(--color-accent-hover);
+    background-color: var(--bg-dark);
     /* Passe sur ton fond noir de marque */
     /* border-color: var(--color-accent); */
-    color: var(--bg-main);
+    color: var(--color-brand);
     /* L'icône vire au blanc pur */
     transform: translateY(-2px);
     /* Micro-effet de lévitation UX haut de gamme */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--color-brand);
 }
 
 /* ==========================================================================
@@ -474,75 +489,168 @@ nav a:hover {
    ========================================================================== */
 
 .hero {
-    width: 100%;
+    width: calc(100% - 2rem);
+    max-width: var(--container-max-width);
     height: calc(100vh - var(--header-height));
-    min-height: calc(100vh - 70px);
+    /* min-height: calc(100vh - 70px); */
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--bg-main);
-    /* 60% : Fond blanc pur du site */
-    padding: var(--space-sm) 0;
+    margin-right: auto;
+    margin-left: auto;
+    /* padding: var(--space-sm) 0; */
 }
 
 .hero .container {
-    max-width: 1000px;
-    width: 100%;
+    max-width: var(--container-max-width);
+    width: calc(100% - 2rem);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 0px solid var(--border-color);
+    border-radius: var(--radius-md);
 }
 
-/* 🌟 LA CARTE EN VERRE TRANSPARENTE (VERSION MINIMALISTE ÉPUREE) */
+/* ==========================================================================
+   NVHFAST - CONFIGURATION HERO CARTE CENTRÉE PROPORTIONNELLE CORE RESTORED)
+   ========================================================================== */
+
+/* La carte centrale restreinte pour cadrer idéalement votre titre sur 2 lignes */
 .hero-card {
-    position: relative;
-    width: 100%;
-    padding: var(--space-xl) var(--space-md);
-    /* Donne du souffle en haut et en bas */
-    background-color: rgba(255, 255, 255, 0.75);
-    /* Verre translucide */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    /* Alignement parfait avec le design de ta capsule flottante du haut */
-    border: 1px solid rgba(33, 47, 61, 0.08);
-    border-radius: var(--radius-md);
-    box-shadow: 0 10px 40px rgba(33, 47, 61, 0.03);
-
+    /* background: var(--bg-surface-alt); */
+    min-height: 100%;
+    width: 60%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-/* Typographies et boutons forcés pour la lisibilité */
-.hero-card h1,
-.hero-card p,
-.hero-card .cta-group {
-    position: relative;
-    z-index: 2;
+    gap: var(--space-md);
+    justify-content: center;
+    color: var(--bg-surface-alt);
+    padding: var(--space-md);
+    margin-right: var(--space-lg);
 }
 
 .hero-card h1 {
-    font-size: clamp(2.1rem, 5vw, 3.4rem);
+    font-family: var(--font-logo);
+    font-size: clamp(2.8rem, 6vw, 4rem);
     font-weight: 800;
     letter-spacing: -0.04em;
-    line-height: 1.15;
-    margin-bottom: var(--space-sm);
-    color: var(--text-primary);
-    /* 30% : Bleu-Gris acier */
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
 }
 
-.hero-card p {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: var(--text-secondary);
-    /* 30% : Ardoise sombre */
-    max-width: 680px;
-    line-height: 1.6;
-    margin-bottom: var(--space-md);
+/* Adoucir le sous-titre pour créer la hiérarchie */
+.hero-card .subtitle {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    /* Plus petit que le H1 */
+    font-weight: 600;
+    /* Légèrement moins épais */
+    display: block;
+    /* Force le retour à la ligne proprement */
 }
+
+/* Rendre le paragraphe plus lisible */
+.hero-description {
+    width: 80%;
+    line-height: 1.65;
+    font-family: var(--font-system);
+    font-size: 1.25rem;
+}
+
+/* Le bouton principal turquoise calibré précisément à la moitié de la carte */
+.btn-hero-xl {
+    width: 80%;
+    /* min-width: 100%;  */
+    text-align: left;
+    /* Sécurité visuelle */
+    padding: 1.1rem 2rem !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    background-color: var(--color-brand) !important;
+    color: var(--text-primary) !important;
+    text-transform: uppercase;
+    border: 2px solid var(--bg-dark);
+    border-radius: var(--radius-xs) !important;
+    box-shadow: 0 5px 30px rgba(0, 163, 180, 0.1);
+    transition: var(--transition-smooth);
+}
+
+.btn-hero-xl:hover {
+    background-color: var(--text-primary) !important;
+    color: var(--color-brand) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 180, 216, 0.15);
+}
+
+.valors-list {
+    width: 50%;
+    min-height: 100%;
+    /* overflow: hidden; */
+    margin-left: var(--space-lg);
+}
+
+.valors-list img {
+    height: 100%;
+    width: 100%;
+    /* On agrandit légèrement l'image */
+    object-fit: contain;
+    object-position: center;
+    /* Masque de dégradé pour adoucir les contours */
+    mask-image: radial-gradient(circle, black 60%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
+}
+
+.hero-card .hero-trust-line {
+    margin-top: var(--space-sm);
+    font-size: 0.82rem;
+    color: var(--bg-surface-alt);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.03em;
+}
+
+/* --- NEW Micro Badge Hero --- */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background-color: rgba(0, 163, 180, 0.08);
+    /* Version ultra-douce de ta marque */
+    border: 1px solid rgba(0, 163, 180, 0.2);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: var(--space-sm);
+}
+
+.hero-star-icon,
+.mini-star {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: var(--bg-surface-alt);
+    clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
+}
+
+/* --- NEW Ligne de réassurance --- */
+.hero-trust-line {
+    width: 80%;
+    font-size: 0.85rem;
+    color: var(--bg-surface-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: 0.03em;
+    margin-top: var(--space-sm);
+}
+
+/* Typographies et boutons forcés pour la lisibilité */
 
 .cta-group {
     display: flex;
     gap: var(--space-sm);
     align-items: center;
+    text-align: center;
 }
 
 /* --- Boutons --- */
@@ -821,21 +929,119 @@ footer[role="contentinfo"] {
     }
 
     html {
-        scroll-snap-type: y proximity;
+        scroll-snap-type: none;
     }
 
-    section,
-    #hero {
+    section {
         width: 100%;
+        /* 🌟 RETOUR AUX CONDITIONS AUX LIMITES POUR LE JS */
+        /* height: auto; <- Supprimé ou remplacé par min-height */
         height: auto;
+
+        /* On force CHAQUE section à occuper AU MOINS tout l'écran disponible */
+        /* sans pour autant bloquer le contenu si celui-ci venait à déborder */
         min-height: calc(100vh - var(--header-height));
-        /* 🌟 MODIFICATION : vh stable */
+
         display: flex;
         align-items: center;
         justify-content: center;
+
+        /* On rétablit un padding vertical plus léger pour maximiser l'espace utile */
         padding: var(--space-lg) 0;
-        scroll-snap-align: start;
+
+        scroll-snap-align: none;
         scroll-snap-stop: normal;
+    }
+
+    .hero {
+        width: calc(100% - 2rem);
+        max-width: var(--container-max-width);
+        /* Le composant prend toute la hauteur minimale offerte par la section */
+        min-height: calc(100vh - var(--header-height) - calc(var(--space-lg) * 2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .hero .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        gap: 0;
+    }
+
+    .hero-card {
+        min-height: auto;
+        width: 100%;
+        max-width: 650px;
+        align-items: center;
+        margin-right: 0;
+
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: var(--radius-md);
+        padding: var(--space-lg) var(--space-md);
+
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+            0 0 50px rgba(0, 163, 180, 0.03);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .hero-card h1 {
+        text-align: center;
+        font-size: clamp(2.2rem, 5vw, 2.8rem);
+        /* Légèrement réduit pour un équilibre parfait sur tablette */
+        line-height: 1.2;
+    }
+
+    .hero-description {
+        width: 100%;
+        font-size: 1.15rem;
+        /* Taille de lecture optimale, plus douce que le 1.5rem d'origine */
+        margin-top: var(--space-md);
+        text-align: center;
+        color: rgba(248, 249, 25a, 0.85);
+        /* Léger adoucissement de la couleur pour le confort visuel */
+    }
+
+    .hero-action-block {
+        width: 100%;
+        max-width: 450px;
+        margin-top: var(--space-lg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-hero-xl {
+        width: 100%;
+        text-align: center;
+        font-size: 1.1rem !important;
+        letter-spacing: 0.02em;
+    }
+
+    .hero-card .hero-trust-line {
+        width: 100%;
+        font-size: 0.9rem;
+        justify-content: center;
+        text-align: center;
+        margin-top: var(--space-sm);
+        color: var(--color-brand);
+        /* La ligne de confiance passe en turquoise pour illuminer le bas du bloc */
+    }
+
+    /* ==========================================================================
+       🌿 SUPPRESSION ET NETTOYAGE DE L'IMAGE
+       ========================================================================== */
+    .valors-list {
+        display: none !important;
+        /* L'image ne pèse plus rien dans l'arbre de rendu (DOM) */
     }
 
     .section-legal {

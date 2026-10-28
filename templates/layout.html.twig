@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="{% block meta_description %}Site vitrine haut de gamme sur mesure par NVH Studio.{% endblock %}">
+        {# INSERTION FONTS SPACE GROTEK #}
+        <link rel="preload" href="{{ app.base_path }}/assets/fonts/space-grotesk-variable.woff2" as="font" type="font/woff2" crossorigin>
     
         <title>{% block title %}Bienvenue{% endblock %} | NVH Studio</title>
 
@@ -13,7 +15,6 @@
 
     </head>
     <body>
-
         <!-- Inclusion de l'en-tête et de la navbar -->
         {% include 'partials/_header.html.twig' %}
 
@@ -47,6 +48,5 @@
                 </div>
             </div>
         {% endif %}
-
     </body>
 </html>

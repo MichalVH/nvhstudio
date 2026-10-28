@@ -8,3 +8,26 @@
     # RÈGLE 2 : Sinon, on redirige vers index.php de manière relative au dossier courant
     RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
+
+# ==========================================================================
+# NVHFAST - CONFIGURATION DES EN-TÊTES DE CACHE NAVIGATEUR (PRODUCTION)
+# ==========================================================================
+<IfModule mod_expires.c>
+    # 1. Activation du moteur de mise en cache d'Apache
+    ExpiresActive On
+
+    # 2. Règle par défaut (si un fichier n'est pas listé ci-dessous)
+    ExpiresDefault "access plus 2 days"
+
+    # 3. Cache longue durée (1 an) pour les polices (votre font Space Grotesk)
+    ExpiresByType font/woff2 "access plus 1 year"
+
+    # 4. Cache moyenne durée (1 mois) pour les images (votre illustration SVG)
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+
+    # 5. Cache courte durée (1 semaine) pour votre CSS et vos scripts JS d'artisan
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>

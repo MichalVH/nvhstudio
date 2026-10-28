@@ -1,14 +1,18 @@
 {# templates/partials/_header.html.twig #}
 <header role="banner">
     <div class="container header-grid">
-        <!-- BLOC 1 : Le Logo (Structure NVH Studio) -->
+
+        <!-- BLOC 1 : Le Logo Textuel en Ligne + Étoile Scintillante (Structure NVH Studio) -->
         <a href="{{ app.base_path }}/accueil" data-section="hero" class="logo-studio" aria-label="NVH Studio - Accueil">
-            <div class="logo-wrapper">
-                <div class="logo-text-row">
-                    <span class="logo-trigger">NVH</span>
-                    <span class="logo-sub">studio<span class="logo-star-exponent" title="L'Étoile des Mages (17)"></span></span>
-                </div>
-                <span class="logo-slogan">{{ site_slogan|default('Performance & Excellence') }}</span>
+            <div class="logo-text-container">
+                <span class="logo-trigramme">NVH</span>
+                <span class="logo-qualifier">
+                    studio
+                    <!-- L'étoile des mages codée en SVG natif (URL XMLNS Corrigée) -->
+                    <svg class="star-sparkle" viewBox="0 0 24 24" xmlns="http://w3.org" aria-hidden="true">
+                        <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"/>
+                    </svg>
+                </span>
             </div>
         </a>
 
@@ -17,5 +21,6 @@
 
         <!-- BLOC 3 DESKTOP : Ta nouvelle barre d'action, masquée sur mobile -->
         {% include 'partials/_navbar-contact.html.twig' with {'classes': 'desktop-only'} %}
+
     </div>
 </header>
