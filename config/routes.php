@@ -15,7 +15,7 @@ $router->map('GET', '/', 'HomeController#index', 'home_root');
 $router->map('GET', '/accueil', 'HomeController#index', 'home_accueil');
 $router->map('GET', '/services', 'HomeController#index', 'home_services');
 $router->map('GET', '/a-propos', 'HomeController#index', 'home_about');
-$router->map('GET', '/temoignages', 'HomeController#index', 'home_testimonials');
+// $router->map('GET', '/temoignages', 'HomeController#index', 'home_testimonials');
 $router->map('GET', '/contact', 'HomeController#index', 'home_contact_view');
 
 // ROUTES TEST UNIQUES POUR LE TEST DE SURCHARGE DU ONE-PAGE DYNAMIQUE (Toutes pointent sur l'index)

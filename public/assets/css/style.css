@@ -60,7 +60,7 @@
 }
 
 /* ==========================================================================
-   RESET FONCTIONS & SÉCURITÉS APPAREILS
+   RESET FONCTIONS & SÉCURITÉS APPAREILS (CORRIGÉ POUR STICKY)
    ========================================================================== */
 *,
 *::before,
@@ -68,6 +68,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+/* On supprime max-width et overflow-x ici pour ne pas bloquer le sticky */
+html,
+body {
+    width: 100%;
 }
 
 html {
@@ -80,7 +86,12 @@ html {
     -webkit-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+
+    /* FIX STICKY : On utilise 'clip' au lieu de 'hidden'. 
+       'clip' bloque les débordements horizontaux SANS créer de contexte d'overflow,
+       ce qui permet au position: sticky de fonctionner parfaitement ! */
+    overflow-x: clip;
+
     scroll-padding-top: calc(var(--header-height) + 1.5rem);
 }
 
@@ -88,6 +99,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    /* Suppression de overflow-x ici */
 }
 
 main {
@@ -99,7 +111,7 @@ main {
    NVHFAST - HEADER COMPOSANT FLOTTANT HAUT DE GAMME
    ========================================================================== */
 header[role="banner"] {
-    position: sticky;
+    position: sticky !important;
     top: 1rem;
     z-index: 100;
     width: calc(100% - 2rem);
@@ -450,7 +462,7 @@ section {
 .hero-trust-line {
     width: 80%;
     font-size: 0.85rem;
-    color: rgba(248, 249, 250, 0.75);
+    color: var(--text-primary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -485,106 +497,589 @@ section {
     -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
 }
 
-/* --- Grille de Services --- */
-.grid-services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: var(--space-md);
-    width: 100%;
+/* ==========================================================================
+   NVHFAST - EXTENSION SERVICES COMPACTE (SÉCURISÉE SANS DÉBORDEMENT)
+   ========================================================================== */
+
+#services {
+    /* Sécurité : si l'écran est trop petit, la section s'allonge au lieu de casser */
+    height: auto;
+    min-height: calc(100vh - var(--header-height));
+    padding: var(--space-md) 0;
+    display: flex;
+    align-items: center;
 }
 
-.card-service {
-    background-color: var(--bg-main);
-    border: 1px solid var(--border-color);
-    padding: var(--space-md);
+.services-hero-header {
+    text-align: center;
+    max-width: 800px;
+    /* Marge réduite pour laisser de la place aux cartes */
+    margin: 0 auto var(--space-md) auto;
+}
+
+.services-hero-lead {
+    font-family: var(--font-system);
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: rgba(248, 249, 250, 0.85);
+    margin-top: var(--space-xs);
+}
+
+.grid-offers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: stretch;
+}
+
+.card-offer {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-md);
+    /* Padding plus compact (Haut/Bas Droite/Gauche) */
+    padding: var(--space-sm) var(--space-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition-smooth);
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* CORRECTIF COMPLET DU HALO ET DE LA BORDURE */
+.card-offer.offer-premium {
+    border: 2px solid var(--color-brand);
+    /* Correction syntaxique : background standard */
+    background: radial-gradient(circle at top right, rgba(0, 163, 180, 0.1) 0%, transparent 60%), rgba(255, 255, 255, 0.02);
+    box-shadow: 0 20px 40px rgba(0, 163, 180, 0.1);
+}
+
+.card-offer:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-brand);
+}
+
+.offer-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: var(--space-xs);
+    margin-bottom: var(--space-xs);
+}
+
+.offer-badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border-radius: var(--radius-xs);
+    margin-bottom: var(--space-xs);
+}
+
+.offer-badge.badge-accent {
+    background-color: var(--color-brand);
+    color: var(--bg-main);
+}
+
+.card-offer h3 {
+    font-family: var(--font-logo);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.offer-target {
+    font-size: 0.9rem;
+    color: rgba(248, 249, 250, 0.7);
+    line-height: 1.4;
+    min-height: 38px;
+}
+
+.offer-price {
+    margin-top: var(--space-xs);
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.price-amount {
+    font-family: var(--font-logo);
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.price-tax {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-brand);
+}
+
+.offer-body {
+    margin-bottom: var(--space-sm);
+}
+
+.offer-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* Espace resserré entre les puces */
+}
+
+.offer-features li {
+    font-size: 0.95rem;
+    color: rgba(248, 249, 250, 0.9);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.offer-features strong {
+    color: var(--text-primary);
+}
+
+.offer-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: auto;
+}
+
+.offer-subscription-mention {
+    font-size: 0.85rem;
+    color: rgba(248, 249, 250, 0.7);
+    text-align: center;
+}
+
+.offer-subscription-mention strong {
+    color: var(--color-brand);
+}
+
+.card-offer .btn-hero-xl {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    /* Bouton légèrement plus compact en hauteur */
+}
+
+/* ==========================================================================
+   NVHFAST - REPRISE DES SERVICES SECONDAIRES (RYTHME ET DESIGN CORRIGÉS)
+   ========================================================================== */
+
+.services-secondary-header {
+    text-align: center;
+    /* On donne une vraie marge en haut pour détacher du premier bloc */
+    margin: var(--space-lg) auto var(--space-md) auto;
+}
+
+.section-title-secondary {
+    font-family: var(--font-logo);
+    font-size: 1.6rem;
+    /* Légèrement plus grand pour s'affirmer */
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.grid-secondary-services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    /* On passe sur un espacement plus large (md au lieu de sm) */
+    width: 100%;
+    max-width: 1150px;
+    /* Un poil plus large pour donner de l'envergure aux cartes */
+    margin: 0 auto;
+    /* On ajoute une grosse marge en bas pour équilibrer la fin de la section */
+    margin-bottom: var(--space-lg);
+}
+
+.card-secondary-service {
+    background-color: rgba(255, 255, 255, 0.02);
+    /* Fond subtilement plus visible */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    /* On donne de l'air à l'intérieur de la carte */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 240px;
+    /* On force une hauteur minimale pour stabiliser la structure */
     transition: var(--transition-smooth);
 }
 
-.card-service:hover {
+.card-secondary-service:hover {
+    border-color: var(--color-brand);
+    background-color: rgba(255, 255, 255, 0.04);
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-.card-service h3 {
-    font-size: 1.15rem;
+.secondary-service-icon {
     margin-bottom: var(--space-xs);
+}
+
+.card-secondary-service h4 {
+    font-family: var(--font-logo);
+    font-size: 1.3rem;
+    /* Titre de carte plus impactant */
     font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
 }
 
-.card-service p {
-    color: var(--text-secondary);
+.card-secondary-service p {
     font-size: 0.95rem;
+    /* Lecture plus confortable */
+    color: rgba(248, 249, 250, 0.75);
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
 }
 
-/* --- Section À Propos --- */
-.split-about {
+.secondary-service-footer {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-lg);
+    flex-direction: column;
+    gap: var(--space-sm);
+    /* Plus d'espace entre le prix et le bouton */
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--space-sm);
+}
+
+.secondary-price {
+    font-family: var(--font-logo);
+    font-size: 1.3rem;
+    /* Prix valorisé */
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.secondary-price small {
+    font-size: 0.75rem;
+    color: var(--color-brand);
+    /* La mention de taxe passe en turquoise */
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-left: 4px;
+}
+
+/* 🌟 LE NOUVEAU BOUTON OUTLINE ÉPURÉ ET VISIBLE */
+.card-secondary-service .link-action {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.6rem var(--space-sm);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 2px solid rgba(0, 163, 180, 0.3);
+    /* Bordure turquoise translucide par défaut */
+    border-radius: var(--radius-xs);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.card-secondary-service .link-action:hover {
+    border-color: var(--color-brand);
+    background-color: var(--color-brand);
+    color: var(--bg-main);
+    /* Inversion des couleurs au survol, très qualitatif */
+    box-shadow: 0 5px 15px rgba(0, 163, 180, 0.2);
+}
+
+/* ==========================================================================
+   CONFIGURATION RESPONSIVE EXCLUSIVE (MOBILE & TABLETTE)
+   ========================================================================== */
+
+@media (max-width: 999px) {
+    .services-hero-header {
+        margin-bottom: var(--space-md);
+    }
+
+    .grid-offers {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        padding: 0 var(--space-xs);
+    }
+
+    .card-offer {
+        padding: var(--space-md);
+    }
+
+    .offer-target {
+        min-height: auto;
+    }
+
+    .services-secondary-header {
+        margin-top: var(--space-md);
+    }
+
+    .grid-secondary-services {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        padding: 0 var(--space-xs);
+        margin-bottom: var(--space-md);
+    }
+
+    .card-secondary-service {
+        padding: var(--space-sm);
+    }
+}
+
+/* ==========================================================================
+   NVHFAST - SECTION À PROPOS CENTRÉE ET HARMONIEUSE
+   ========================================================================== */
+.about-section {
+    height: auto !important;
+    min-height: calc(100vh - var(--header-height));
+    padding: var(--space-xl) 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+}
+
+/* En-tête de section centré */
+.about-header-centered {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto var(--space-md) auto;
+}
+
+.about-header-centered .about-lead {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: rgba(248, 249, 250, 0.75);
+    margin-top: var(--space-xs);
+}
+
+/* Bloc de texte de l'histoire centré et calibré pour la lecture */
+.about-text-centered-block {
+    max-width: 750px;
+    margin: 0 auto var(--space-lg) auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+    /* Harmonise tout l'alignement */
+}
+
+.about-text-centered-block p {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: rgba(248, 249, 250, 0.85);
+}
+
+/* Style spécifique pour la première phrase d'accroche */
+.about-text-centered-block .p-highlight {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Grande Citation (Break de rythme) */
+.about-blockquote {
+    width: 100%;
+    max-width: 900px;
+    margin: var(--space-lg) auto;
+    text-align: center;
+    border-left: none;
+    /* On casse le style classique */
+    padding: 0 var(--space-md);
+}
+
+.about-blockquote blockquote {
+    font-family: var(--font-logo);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-brand);
+    letter-spacing: -0.01em;
+}
+
+/* Zone entête technique */
+.about-tech-header {
+    text-align: center;
+    max-width: 700px;
+    margin: var(--space-lg) auto var(--space-md) auto;
+}
+
+.about-tech-header h3 {
+    font-family: var(--font-logo);
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: var(--space-xs);
+}
+
+.about-tech-header p {
+    font-size: 1rem;
+    color: rgba(248, 249, 250, 0.7);
+}
+
+/* Grille des 3 Cartes Techniques */
+.about-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    width: 100%;
+    margin-bottom: var(--space-lg);
+}
+
+.about-card {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    transition: var(--transition-smooth);
+}
+
+.about-card:hover {
+    border-color: var(--color-brand);
+    background-color: rgba(255, 255, 255, 0.04);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.about-card-icon {
+    margin-bottom: var(--space-xs);
+}
+
+.about-card h4 {
+    font-family: var(--font-logo);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.about-card p {
+    font-size: 0.95rem;
+    color: rgba(248, 249, 250, 0.75);
+    line-height: 1.6;
+}
+
+/* Footer de conclusion */
+.about-vision-footer {
+    max-width: 850px;
+    margin: var(--space-lg) auto 0 auto;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.about-vision-footer h3 {
+    font-family: var(--font-logo);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.about-vision-footer p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(248, 249, 250, 0.85);
+}
+
+/* ==========================================================================
+   NVHFAST - REFONDE PREMIUM SECTION CONTACT (GRID SPLIT & DARK FORM)
+   ========================================================================== */
+
+.contact-section-premium {
+    height: auto !important;
+    min-height: calc(100vh - var(--header-height));
+    padding: var(--space-xl) 0;
+    display: flex;
+    align-items: center;
+}
+
+.contact-grid-split {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-xl);
     align-items: center;
     width: 100%;
 }
 
-.about-text,
-.about-media {
-    flex: 1 1 450px;
+/* --- Colonne de gauche : Contenu & Réassurance --- */
+.contact-info-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    color: var(--text-primary);
 }
 
-.about-text p {
-    color: var(--text-secondary);
+.contact-lead-text {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: rgba(248, 249, 250, 0.8);
     margin-bottom: var(--space-sm);
-    font-size: 1.05rem;
 }
 
-.wireframe-box {
-    background-color: var(--bg-surface-alt);
-    border: 2px dashed var(--border-color);
+/* Encart commercial haut de gamme */
+.commercial-trust-card {
+    display: flex;
+    gap: var(--space-sm);
+    background: radial-gradient(circle at top right, rgba(0, 163, 180, 0.1) 0%, transparent 80%), rgba(255, 255, 255, 0.01);
+    border: 2px dashed rgba(0, 163, 180, 0.4);
     border-radius: var(--radius-md);
-    aspect-ratio: 16 / 10;
+    padding: var(--space-md);
+    width: 100%;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    margin-bottom: var(--space-sm);
+}
+
+.trust-card-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-muted);
-    font-weight: 500;
+    padding-top: 4px;
 }
 
-/* --- Section Témoignages --- */
-.grid-testimonials {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-md);
+.trust-card-content h3 {
+    font-family: var(--font-logo);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+}
+
+.trust-card-content p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(248, 249, 250, 0.75);
+}
+
+/* --- Colonne de droite : Formulaire Glassmorphic --- */
+.contact-wrapper-premium {
     width: 100%;
-}
-
-.card-testimonial {
-    background-color: var(--bg-main);
-    border: 1px solid var(--border-color);
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     padding: var(--space-md);
     border-radius: var(--radius-md);
-    border-left: 4px solid var(--color-brand);
-}
-
-.testimonial-text {
-    font-style: italic;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-sm);
-}
-
-.testimonial-author {
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-/* --- Formulaire de Contact --- */
-.contact-wrapper {
-    max-width: 550px;
-    width: 100%;
-    margin: 0 auto;
-    background-color: var(--bg-main);
-    border: 1px solid var(--border-color);
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .form-group {
@@ -605,34 +1100,39 @@ section {
     margin-bottom: var(--space-xs);
 }
 
-.form-control {
+/* Champs de saisie typés sombres */
+.form-control-premium {
     width: 100%;
-    padding: 0.75rem var(--space-sm);
+    padding: 0.85rem var(--space-sm);
     font-family: var(--font-system);
     font-size: 0.95rem;
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
+    background-color: rgba(3, 43, 53, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: var(--radius-sm);
     color: var(--text-primary);
     transition: var(--transition-smooth);
 }
 
-.form-control:focus {
+.form-control-premium::placeholder {
+    color: rgba(248, 249, 250, 0.4);
+}
+
+.form-control-premium:focus {
     outline: none;
     border-color: var(--color-brand);
-    background-color: var(--bg-main);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    background-color: rgba(3, 43, 53, 0.9);
+    box-shadow: 0 0 0 3px rgba(0, 163, 180, 0.15);
 }
 
-textarea.form-control {
+textarea.form-control-premium {
     resize: vertical;
-    min-height: 110px;
+    min-height: 130px;
 }
 
-.btn-submit {
+/* Adaptation forcée du bouton XL pour le formulaire */
+.contact-wrapper-premium .btn-hero-xl {
     width: 100%;
-    justify-content: center;
-    gap: var(--space-xs);
+    cursor: pointer;
     border: none;
 }
 
@@ -718,7 +1218,7 @@ footer[role="contentinfo"] {
 }
 
 /* ==========================================================================
-   NVHFAST - CONFIGURATION RESPONSIVE EXCLUSIVE (FENÊTRAGE NETTOYÉ)
+   CONFIGURATION RESPONSIVE EXCLUSIVE (RESTAURATION ET REPARATION)
    ========================================================================== */
 
 @media (max-width: 999px) {
@@ -729,25 +1229,18 @@ footer[role="contentinfo"] {
 
     html {
         scroll-snap-type: none;
+        overflow-x: clip;
+        /* Sécurité mobile */
     }
 
     section {
         width: 100%;
-        /* 🌟 RETOUR AUX CONDITIONS AUX LIMITES POUR LE JS */
-        /* height: auto; <- Supprimé ou remplacé par min-height */
         height: auto;
-
-        /* On force CHAQUE section à occuper AU MOINS tout l'écran disponible */
-        /* sans pour autant bloquer le contenu si celui-ci venait à déborder */
         min-height: calc(100vh - var(--header-height));
-
         display: flex;
         align-items: center;
         justify-content: center;
-
-        /* On rétablit un padding vertical plus léger pour maximiser l'espace utile */
         padding: var(--space-lg) 0;
-
         scroll-snap-align: none;
         scroll-snap-stop: normal;
     }
@@ -755,7 +1248,6 @@ footer[role="contentinfo"] {
     .hero {
         width: calc(100% - 2rem);
         max-width: var(--container-max-width);
-        /* Le composant prend toute la hauteur minimale offerte par la section */
         min-height: calc(100vh - var(--header-height) - calc(var(--space-lg) * 2));
         display: flex;
         align-items: center;
@@ -776,18 +1268,16 @@ footer[role="contentinfo"] {
 
     .hero-card {
         min-height: auto;
-        width: 100%;
+        width: 100% !important;
+        box-sizing: border-box;
         max-width: 650px;
         align-items: center;
         margin-right: 0;
-
         background: rgba(255, 255, 255, 0.02);
         border: 1px solid rgba(255, 255, 255, 0.05);
         border-radius: var(--radius-md);
         padding: var(--space-lg) var(--space-md);
-
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
-            0 0 50px rgba(0, 163, 180, 0.03);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 163, 180, 0.03);
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
     }
@@ -795,18 +1285,15 @@ footer[role="contentinfo"] {
     .hero-card h1 {
         text-align: center;
         font-size: clamp(2.2rem, 5vw, 2.8rem);
-        /* Légèrement réduit pour un équilibre parfait sur tablette */
         line-height: 1.2;
     }
 
     .hero-description {
         width: 100%;
         font-size: 1.15rem;
-        /* Taille de lecture optimale, plus douce que le 1.5rem d'origine */
         margin-top: var(--space-md);
         text-align: center;
-        color: rgba(248, 249, 25a, 0.85);
-        /* Léger adoucissement de la couleur pour le confort visuel */
+        color: rgba(248, 249, 250, 0.85);
     }
 
     .hero-action-block {
@@ -830,24 +1317,48 @@ footer[role="contentinfo"] {
         font-size: 0.9rem;
         justify-content: center;
         text-align: center;
+        flex-wrap: wrap;
         margin-top: var(--space-sm);
-        color: var(--color-brand);
-        /* La ligne de confiance passe en turquoise pour illuminer le bas du bloc */
+        color: var(--text-primary);
     }
 
-    /* ==========================================================================
-       🌿 SUPPRESSION ET NETTOYAGE DE L'IMAGE
-       ========================================================================== */
     .valors-list {
         display: none !important;
-        /* L'image ne pèse plus rien dans l'arbre de rendu (DOM) */
+    }
+
+    /* Responsive À Propos */
+    .about-section {
+        padding: var(--space-lg) var(--space-xs) !important;
+    }
+
+    .about-split {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .about-title-block,
+    .about-text-block {
+        width: 100%;
+    }
+
+    .about-blockquote blockquote {
+        font-size: 1.25rem;
+    }
+
+    .about-features-grid {
+        grid-template-columns: 1fr;
+        /* Passage sur une seule colonne */
+        gap: var(--space-sm);
+    }
+
+    .about-vision-footer {
+        padding: var(--space-sm);
     }
 
     .section-legal {
         display: block;
         height: auto;
         min-height: calc(100vh - var(--header-height));
-        /* 🌟 MODIFICATION : vh stable */
         scroll-snap-align: none;
     }
 
@@ -861,15 +1372,31 @@ footer[role="contentinfo"] {
         grid-template-columns: 1fr;
     }
 
-    .form-group-split {
-        gap: 0.75rem;
+    .contact-section-premium {
+        padding: var(--space-lg) var(--space-xs) !important;
     }
 
-    .form-group {
-        margin-bottom: 0.75rem;
+    .contact-grid-split {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
     }
 
-    /* --- INFRASTRUCTURE NAVIGATION MOBILE & TIROIR BLINDÉ --- */
+    .contact-info-column {
+        align-items: center;
+        text-align: center;
+    }
+
+    .section-title-left {
+        text-align: center;
+    }
+
+    .commercial-trust-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: var(--space-sm);
+    }
+
     .desktop-only {
         display: none !important;
     }
@@ -886,51 +1413,45 @@ footer[role="contentinfo"] {
 
     .navbar-contact.mobile-only .btn-contact-circle {
         width: 3rem;
-        /* Équivaut à 48px (3 x 16) */
         height: 3rem;
-        /* Forme un cercle parfait et accessible */
     }
 
     .navbar-contact.mobile-only .btn-contact-circle svg {
         width: 1.375rem;
-        /* Équivaut à 22px (22 / 16) */
         height: 1.375rem;
-    }
-
-    header[role="banner"] .container {
-        position: relative;
     }
 
     nav {
         display: block;
     }
 
-    /* 1. Le Full Overlay immersif 100% hermétique (Zéro débordement du fond) */
+    /* ==========================================================================
+       🌟 RESTAURATION COMPLÈTE DU MENU BURGER D'ORIGINE
+       ========================================================================== */
     .menu-drawer {
         display: flex;
         position: fixed;
-
-        /* Fusionne pile sous le header */
         top: calc(var(--header-height) + 1rem);
-
-        /* 🌟 FIX ULTIME : S'étale sur 100% de la largeur du téléphone pour bloquer l'arrière-plan */
-        left: 0;
-        right: 0;
-        width: 100%;
+        left: 1rem;
+        /* 🌟 RETOUR AUX MARGES DU HERO */
+        right: 1rem;
+        /* 🌟 RETOUR AUX MARGES DU HERO */
+        width: calc(100% - 2rem);
+        /* 🌟 RETOUR À LA LARGEUR FLOTTANTE D'ORIGINE */
 
         background: var(--bg-dark);
+        /* 🌟 RESTAURATION DE VOTRE BEAU DÉGRADÉ RADIAL */
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         z-index: 9999;
         flex-direction: column;
         justify-content: space-between;
-        height: calc(100vh - var(--header-height) - 3rem);
 
-        /* TRANSFERT DE LA BORDURE ARGENTÉE TOUT EN BAS */
+        /* 🌟 FIX SÉCURITÉ : Bloque la hauteur pour couvrir tout l'écran au scroll sur Services */
+        height: calc(100vh - var(--header-height) - 2.5rem);
+
         border-bottom: 2px solid var(--color-silver);
-        /* 🌟 Retrait des arrondis supérieurs pour une ligne latérale parfaitement étanche */
         border-bottom-left-radius: var(--radius-md);
         border-bottom-right-radius: var(--radius-md);
-
         opacity: 0;
         visibility: hidden;
         transform: translateY(-10px);
@@ -939,7 +1460,6 @@ footer[role="contentinfo"] {
             visibility 0.3s;
     }
 
-    /* 2. État activé piloté par Menu.js */
     .menu-drawer.menu-active {
         opacity: 1;
         visibility: visible;
@@ -948,7 +1468,6 @@ footer[role="contentinfo"] {
         padding-bottom: var(--space-md);
     }
 
-    /* 3. Centrage et lisibilité des liens (Ligne parasite supprimée) */
     nav ul {
         display: flex;
         flex-direction: column;
@@ -959,33 +1478,21 @@ footer[role="contentinfo"] {
         margin-bottom: auto;
         text-align: center;
         max-height: 50vh;
-
-        /* 🌟 NETTOYAGE : On laisse le comportement de défilement naturel sans forcer de scrollbar visible */
         overflow-y: auto;
         padding: 0 var(--space-xs);
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        /* Masque sur Firefox */
     }
 
-    /* 🌟 ON SUPPRIME COMPLÈTEMENT LES SECTEURS WEBKIT-SCROLLBAR QUI CRÉAIENT LE TRAIT */
     nav ul::-webkit-scrollbar {
         display: none !important;
-        /* Masque sur Chrome/Safari/Edge */
     }
 
-    nav ul::-webkit-scrollbar-thumb {
-        background-color: rgba(255, 255, 255, 0.2) !important;
-        border-radius: var(--radius-sm) !important;
-    }
-
-    /* Liens harmonisés pour le thème sombre */
     nav a {
         display: block;
         font-size: 1.3rem;
         font-weight: 600;
         color: var(--text-primary);
-        /* Rendu éclatant sur fond sombre */
         padding: var(--space-sm) 0;
         text-decoration: none;
         transition: var(--transition-smooth);
@@ -997,7 +1504,6 @@ footer[role="contentinfo"] {
         transform: scale(1.03);
     }
 
-    /* 4. Le bouton Burger mobile */
     .burger-trigger {
         display: flex !important;
         flex-direction: column;
@@ -1018,13 +1524,11 @@ footer[role="contentinfo"] {
         border-radius: 2px;
     }
 
-    /* Activation fluide du sous-menu mobile au clic */
     .dropdown-menu.open {
         opacity: 1;
         visibility: visible;
         max-width: none;
         max-height: 350px;
-        /* Laisse la place pour l'extension des sous-liens */
         padding: var(--space-xs) 0;
         transform: none;
     }
@@ -1038,6 +1542,53 @@ footer[role="contentinfo"] {
         color: var(--text-muted);
         text-align: center;
         padding: var(--space-xs) 0;
+    }
+
+    /* ==========================================================================
+       🌟 FIX INJECTION : MARGES ET PADDING EXCLUSIFS PAGE SERVICES MOBILE
+       ========================================================================== */
+    #services {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+        box-sizing: border-box;
+    }
+
+    #services .container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .services-hero-header {
+        margin-bottom: var(--space-md);
+    }
+
+    .grid-offers {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        padding: 0;
+    }
+
+    .card-offer {
+        padding: var(--space-md) var(--space-sm);
+    }
+
+    .offer-target {
+        min-height: auto;
+    }
+
+    .services-secondary-header {
+        margin-top: var(--space-lg);
+    }
+
+    .grid-secondary-services {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        padding: 0;
+        margin-bottom: var(--space-md);
+    }
+
+    .card-secondary-service {
+        padding: var(--space-md);
     }
 }
 

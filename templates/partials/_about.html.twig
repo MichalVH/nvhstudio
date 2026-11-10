@@ -1,15 +1,59 @@
-{# --- FRAGMENT DE PAGE : ABOUT SECTION --- #}
-<section id="about">
-    <div class="container split-about">
-        <div class="about-text">
-            <h2 class="section-title-left">À propos de notre démarche</h2>
-            <p>Nous croyons que chaque entreprise mérite une vitrine digitale d'exception. Notre méthodologie repose sur l'élimination du superflu pour ne garder que l'excellence technique et visuelle.</p>
-            <p>En choosing notre structure, vous investissez dans un actif performant, durable et parfaitement aligné avec vos objectifs de croissance.</p>
+{# templates/partials/_about.html.twig #}
+<section id="about" class="about-section">
+    <div class="container">
+        
+        {# --- 1. EN-TÊTE CENTRÉ (CLASSIQUE ET HARMONIEUX) --- #}
+        <div class="about-header-centered">
+            <h2 class="section-title">L’humain au cœur du soin, <span class="text-highlight">la rigueur au cœur du code</span></h2>
+            <p class="about-lead">Le parcours de NVH Studio : de l'urgence médicale à l'artisanat web sur mesure.</p>
         </div>
-        <div class="about-media">
-            <div class="wireframe-box">
-                <span>Emplacement Illustration Médias</span>
+        
+        {# --- 2. LE TEXTE DE TON HISTOIRE (AÉRÉ ET CENTRÉ) --- #}
+        <div class="about-text-centered-block">
+            <p class="p-highlight">Je m’appelle Nicolas et j’ai fondé NVH Studio avec une conviction simple : les professionnels qui prennent soin des autres méritent que l'on prenne soin de leur présence digitale.</p>
+            <p>Avant de forger des lignes de code, mon quotidien se déroulait dans l'univers exigeant du soin. Des services d'urgences hospitalières aux unités de psychiatrie du CH Charles Perrens à Bordeaux, j'ai appris la valeur cardinale de l'écoute, de l'empathie et d'une patience à toute épreuve. Dans le milieu médical, chaque minute compte et la marge d'erreur n'existe pas.</p>
+            <p>Aujourd'hui, je mets cette rigueur au service des professionnels libéraux, des EHPAD et des structures de santé. Je connais vos contraintes de temps, vos impératifs de confidentialité et votre besoin de solutions fiables qui fonctionnent sans accroc, jour après jour.</p>
+        </div>
+
+        {# --- 3. GRANDE CITATION EXERGUE --- #}
+        <div class="about-blockquote">
+            <blockquote>
+                « Dans le milieu médical, la marge d'erreur n'existe pas. J'applique cette même rigueur à chaque ligne de code pour protéger votre activité. »
+            </blockquote>
+        </div>
+
+        {# --- 4. PHILOSOPHIE TECHNIQUE (LES 3 CARTES) --- #}
+        <div class="about-tech-header">
+            <h3>L'Artisanat Digital au service de votre sécurité</h3>
+            <p>Pourquoi NVH Studio refuse le copier-coller et les solutions génériques.</p>
+        </div>
+
+        <div class="about-features-grid">
+            <div class="about-card">
+                <div class="about-card-icon"><span class="mini-star"></span></div>
+                <h4>Sécurité maximale</h4>
+                <p>Un code entièrement maîtrisé et audité pour bloquer les failles critiques (OWASP), protégeant l'intégrité de vos informations professionnelles et médicales.</p>
+            </div>
+
+            <div class="about-card">
+                <div class="about-card-icon"><span class="mini-star"></span></div>
+                <h4>Performance brute</h4>
+                <p>Des architectures pures qui atteignent la note maximale de 100/100 sur Google Lighthouse. Vos patients accèdent à vos informations instantanément.</p>
+            </div>
+
+            <div class="about-card">
+                <div class="about-card-icon"><span class="mini-star"></span></div>
+                <h4>Éco-conception réelle</h4>
+                <p>En limitant drastiquement le nombre de requêtes, chaque site conçu par NVH Studio soulage les serveurs et consomme le strict minimum de ressources énergétiques.</p>
             </div>
         </div>
+
+        {# --- 5. ENVOLÉE FINALE & VISION SOLO --- #}
+        <div class="about-vision-footer">
+            <h3>Une relation de confiance, d'artisan à professionnel</h3>
+            <p>NVH Studio est une structure solo par choix et par exigence. Lorsque vous travaillez avec moi, vous n'avez affaire ni à un commercial, ni à un chef de projet distant : <strong>je suis votre unique interlocuteur</strong>, de la première feuille blanche à la mise en ligne. Ma parole et mon nom sont engagés dans la réussite de votre projet.</p>
+            <p>Choisir mon studio, c'est collaborer avec un professionnel engagé, passionné par la technique, avec l'ambition humaine de faire grandir NVH Studio demain pour y intégrer et prendre soin d'une future équipe de jeunes talents du web.</p>
+        </div>
+
     </div>
 </section>

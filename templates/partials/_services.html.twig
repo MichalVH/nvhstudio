@@ -1,29 +1,122 @@
-{# --- FRAGMENT DE PAGE : SERVICES SECTION --- #}
+{# templates/partials/_services.html.twig #}
 <section id="services">
     <div class="container">
-        <h2 class="section-title">Notre Expertise Métier</h2>
-        <div class="grid-services">
+        
+        {# --- EN-TÊTE DE LA SECTION (HERO DE PAGE SERVICES) --- #}
+        <div class="services-hero-header">
+            <h2 class="section-title">Des solutions web d'élite, <span class="text-highlight">entièrement codées par mes soins</span></h2>
+            <p class="services-hero-lead">
+                Des architectures pures, pensées pour le quotidien des professionnels libéraux de la santé. 
+                Gagnez en visibilité auprès de vos patients sans perdre une minute de votre temps médical.
+            </p>
+        </div>
+
+        {# --- GRILLE DES OFFRES PRINCIPALES (DEUX COLONNES) --- #}
+        <div class="grid-offers">
             
-            <div class="card-service">
-                <h3>Performance Absolue</h3>
-                <p>Optimisation maximale du code pour garantir un chargement instantané sur tous les écrans et maximiser votre score Google PageSpeed.</p>
+            {# CARD 1 : OFFRE SITE VITRINE SUR MESURE #}
+            <div class="card-offer">
+                <div class="offer-header">
+                    <span class="offer-badge">Le Best-Seller</span>
+                    <h3>Site Vitrine</h3>
+                    <p class="offer-target">Idéal pour les praticiens et cabinets voulant une visibilité absolue sans gérer la technique.</p>
+                    <div class="offer-price">
+                        <span class="price-amount">1 400€</span>
+                        <span class="price-tax">HT</span>
+                    </div>
+                </div>
+                
+                <div class="offer-body">
+                    <ul class="offer-features">
+                        <li><span class="mini-star"></span> Structure optimisée de 3 à 5 pages</li>
+                        <li><span class="mini-star"></span> Score Lighthouse proche de 100/100</li>
+                        <li><span class="mini-star"></span> Intégration native Doctolib / Secrétariat</li>
+                        <li><span class="mini-star"></span> Formulaire custom avec enregistrement en BDD</li>
+                        <li><span class="mini-star"></span> Sécurité blindée (PHP pur, SOLID, PHPStan 9)</li>
+                    </ul>
+                </div>
+
+                <div class="offer-footer">
+                    <div class="offer-subscription-mention">
+                        Abonnement <strong>Sérénité (45€ HT/mois)</strong> inclus
+                    </div>
+                    <a href="{{ app.base_path }}/contact" data-section="contact" class="btn-hero-xl">Démarrer mon projet</a>
+                </div>
             </div>
 
-            <div class="card-service">
-                <h3>Architecture Robuste</h3>
-                <p>Développement de pointe basé sur les derniers standards de l'ingénierie logicielle, garantissant stabilité et évolutivité.</p>
-            </div>
+            {# CARD 2 : OFFRE SITE ADMINISTRABLE (STRATÉGIE MAGICIEN D'OZ) #}
+            <div class="card-offer offer-premium">
+                <div class="offer-header">
+                    <span class="offer-badge badge-accent">Autonomie Totale</span>
+                    <h3>Site Administrable</h3>
+                    <p class="offer-target">Idéal pour les structures en croissance ayant besoin de publier du contenu régulièrement.</p>
+                    <div class="offer-price">
+                        <span class="price-amount">2 600€</span>
+                        <span class="price-tax">HT</span>
+                    </div>
+                </div>
+                
+                <div class="offer-body">
+                    <ul class="offer-features">
+                        <li><span class="mini-star"></span> <strong>Tout le contenu de l'offre Vitrine</strong></li>
+                        <li><span class="mini-star"></span> Structure étendue (jusqu'à 10 pages / Blog)</li>
+                        <li><span class="mini-star"></span> <strong>Back-Office NVH Studio ultra-simplifié</strong></li>
+                        <li><span class="mini-star"></span> Gestion autonome et sécurisée des textes/photos</li>
+                        <li><span class="mini-star"></span> Nettoyage et optimisation automatique des médias</li>
+                    </ul>
+                </div>
 
-            <div class="card-service">
-                <h3>Expérience Sur Mesure</h3>
-                <p>Une interface épurée, moderne et accessible, entièrement pensée pour souvenir vos visiteurs en clients qualifiés.</p>
-            </div>
-
-            <div class="card-service">
-                <h3>Sécurité Blindée</h3>
-                <p>Protection native contre les vulnérabilités du web et respect strict des meilleures pratiques de sécurité numérique.</p>
+                <div class="offer-footer">
+                    <div class="offer-subscription-mention">
+                        Abonnement <strong>Sérénité Admin (55€ HT/mois)</strong> inclus
+                    </div>
+                    <a href="{{ app.base_path }}/contact" data-section="contact" class="btn-hero-xl">Demander une démo</a>
+                </div>
             </div>
 
         </div>
+
+        {# --- SECTION COMPLÉMENTAIRE : SERVICES PONCTUELS --- #}
+        <div class="services-secondary-header">
+            <h3 class="section-title-secondary">Un besoin spécifique ou un site existant ?</h3>
+        </div>
+
+        <div class="grid-secondary-services">
+            
+            {# BLOC A : REFONTES DE SITES #}
+            <div class="card-secondary-service">
+                <div class="secondary-service-icon"><span class="mini-star"></span></div>
+                <h4>Refonte de site</h4>
+                <p>Votre outil actuel est lent ou obsolète ? Nous migrons l'intégralité de vos contenus vers notre framework ultra-performant.</p>
+                <div class="secondary-service-footer">
+                    <span class="secondary-price">Sur devis</span>
+                    <a href="{{ app.base_path }}/contact" data-section="contact" class="link-action">Étudier mon site &rsaquo;</a>
+                </div>
+            </div>
+
+            {# BLOC B : SOS DÉPANNAGE #}
+            <div class="card-secondary-service">
+                <div class="secondary-service-icon"><span class="mini-star"></span></div>
+                <h4>SOS & Dépannage</h4>
+                <p>Un bug bloquant ? Une extension WordPress qui casse votre affichage ? Intervention technique rapide pour stabiliser votre site.</p>
+                <div class="secondary-service-footer">
+                    <span class="secondary-price">150€ <small>HT / ticket</small></span>
+                    <a href="{{ app.base_path }}/contact" data-section="contact" class="link-action">Demander une intervention &rsaquo;</a>
+                </div>
+            </div>
+
+            {# BLOC C : COACHING & SUPPORT #}
+            <div class="card-secondary-service">
+                <div class="secondary-service-icon"><span class="mini-star"></span></div>
+                <h4>Coaching & Support</h4>
+                <p>Vous construisez votre site WordPress vous-même et vous bloquez ? Une heure de visio pour résoudre vos problèmes ou optimiser votre SEO.</p>
+                <div class="secondary-service-footer">
+                    <span class="secondary-price">75€ <small>HT / heure</small></span>
+                    <a href="{{ app.base_path }}/contact" data-section="contact" class="link-action">Réserver un créneau &rsaquo;</a>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </section>
