@@ -1196,25 +1196,58 @@ textarea.form-control-premium {
     padding-top: var(--space-md);
 }
 
+/* ==========================================================================
+   NVHFAST - FOOTER COMPOSANT FLOTTANT HAUT DE GAMME (MESSING WITH :ROOT)
+   ========================================================================== */
 footer[role="contentinfo"] {
-    background-color: var(--bg-surface);
-    border-top: 1px solid var(--border-color);
-    padding: var(--space-md) 0;
+    position: relative;
+    width: calc(100% - 2rem);
+    max-width: var(--container-max-width);
+    margin: 0 auto var(--space-sm) auto;
+    /* Décale le footer du bas de l'écran */
+    padding: var(--space-sm) var(--space-md);
+    background-color: rgba(3, 43, 53, 0.85);
+    /* Rappel couleur exacte du Header */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-silver);
+    /* Rappel fine bordure argentée */
+    border-radius: var(--radius-md);
+    /* Écho aux angles du Header */
+    box-shadow: 0 4px 30px rgba(33, 47, 61, 0.04);
     text-align: center;
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: var(--text-primary);
+    /* Blanc-Gris acier lisible sur fond sombre */
+}
+
+footer[role="contentinfo"] .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
 }
 
+footer[role="contentinfo"] p {
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+}
+
 .footer-link-legal {
-    color: var(--text-secondary);
+    color: var(--color-silver);
+    /* Argent premium par défaut */
     text-decoration: underline;
+    text-underline-offset: 3px;
     margin-left: var(--space-sm);
+    font-weight: 500;
     transition: var(--transition-smooth);
 }
 
 .footer-link-legal:hover {
     color: var(--color-brand);
+    /* Transition fluide vers le Turquoise NVH */
+    text-shadow: 0 0 8px rgba(0, 163, 180, 0.4);
+    /* Léger halo lumineux au survol */
 }
 
 /* ==========================================================================
@@ -1589,6 +1622,24 @@ footer[role="contentinfo"] {
 
     .card-secondary-service {
         padding: var(--space-md);
+    }
+
+    footer[role="contentinfo"] {
+        width: calc(100% - 2rem);
+        margin-bottom: 1rem;
+        padding: var(--space-sm);
+    }
+
+    footer[role="contentinfo"] p {
+        font-size: 0.85rem;
+        display: flex;
+        flex-direction: column;
+        /* Aligne le texte et le lien verticalement sur mobile */
+        gap: var(--space-xs);
+    }
+
+    .footer-link-legal {
+        margin-left: 0;
     }
 }
 
