@@ -121,7 +121,7 @@ header[role="banner"] {
     margin-left: auto;
     padding-right: var(--space-md);
     padding-left: var(--space-md);
-    background-color: rgba(3, 43, 53, 0.85);
+    background-color: var(--bg-dark);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 2px solid var(--color-silver);
@@ -527,10 +527,10 @@ section {
 
 .grid-offers {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-md);
     width: 100%;
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
     align-items: stretch;
 }
@@ -549,17 +549,17 @@ section {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
-/* CORRECTIF COMPLET DU HALO ET DE LA BORDURE */
+/* MISE EN VALEUR DE LA CARTE CENTRALE (BEST-SELLER) */
 .card-offer.offer-premium {
     border: 2px solid var(--color-brand);
-    /* Correction syntaxique : background standard */
-    background: radial-gradient(circle at top right, rgba(0, 163, 180, 0.1) 0%, transparent 60%), rgba(255, 255, 255, 0.02);
-    box-shadow: 0 20px 40px rgba(0, 163, 180, 0.1);
+    background: radial-gradient(circle at top right, rgba(0, 163, 180, 0.14) 0%, transparent 65%), rgba(255, 255, 255, 0.03);
+    box-shadow: 0 20px 45px rgba(0, 163, 180, 0.15);
+    /* Légère surélévation visuelle sur grand écran */
+    transform: translateY(-8px);
 }
 
-.card-offer:hover {
-    transform: translateY(-5px);
-    border-color: var(--color-brand);
+.card-offer.offer-premium:hover {
+    transform: translateY(-13px);
 }
 
 .offer-header {
@@ -641,8 +641,17 @@ section {
     font-size: 0.95rem;
     color: rgba(248, 249, 250, 0.9);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    /* Aligne l'étoile sur la première ligne de texte */
     gap: 10px;
+    line-height: 1.45;
+}
+
+.offer-features .mini-star {
+    flex-shrink: 0;
+    /* Empêche l'étoile de se déformer sur les longues phrases */
+    margin-top: 6px;
+    /* Aligne parfaitement l'étoile avec le milieu des lettres de la 1ère ligne */
 }
 
 .offer-features strong {
@@ -674,14 +683,95 @@ section {
 }
 
 /* ==========================================================================
-   NVHFAST - REPRISE DES SERVICES SECONDAIRES (RYTHME ET DESIGN CORRIGÉS)
+   NVHFAST - BANDEAU COMPARATIF HÉBERGEMENT & MAINTENANCE
    ========================================================================== */
 
-.services-secondary-header {
-    text-align: center;
-    /* On donne une vraie marge en haut pour détacher du premier bloc */
-    margin: var(--space-lg) auto var(--space-md) auto;
+.hosting-options-section {
+    max-width: 1280px;
+    margin: var(--space-lg) auto 0 auto;
+    padding-top: var(--space-md);
 }
+
+.hosting-header {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto var(--space-md) auto;
+}
+
+.hosting-header p {
+    font-size: 1rem;
+    color: rgba(248, 249, 250, 0.75);
+    margin-top: var(--space-xs);
+}
+
+.grid-hosting-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    align-items: stretch;
+}
+
+.card-hosting {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-smooth);
+}
+
+.card-hosting.hosting-recommended {
+    border: 1px solid rgba(0, 163, 180, 0.45);
+    background: radial-gradient(circle at top right, rgba(0, 163, 180, 0.08) 0%, transparent 70%), rgba(255, 255, 255, 0.02);
+}
+
+.card-hosting:hover {
+    border-color: var(--color-brand);
+    transform: translateY(-3px);
+}
+
+.hosting-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.hosting-price {
+    font-family: var(--font-logo);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.hosting-price small {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-brand);
+}
+
+.card-hosting h4 {
+    font-family: var(--font-logo);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+}
+
+.hosting-desc {
+    font-size: 0.92rem;
+    color: rgba(248, 249, 250, 0.7);
+    line-height: 1.5;
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* ==========================================================================
+   NVHFAST - REPRISE DES SERVICES SECONDAIRES (RYTHME ET DESIGN CORRIGÉS)
+   ========================================================================== */
 
 .section-title-secondary {
     font-family: var(--font-logo);
@@ -692,17 +782,64 @@ section {
     letter-spacing: -0.02em;
 }
 
-.grid-secondary-services {
+.services-secondary-header {
+    text-align: center;
+    max-width: 750px;
+    margin: var(--space-lg) auto var(--space-md) auto;
+}
+
+.secondary-lead {
+    font-size: 1rem;
+    color: rgba(248, 249, 250, 0.75);
+    margin-top: var(--space-xs);
+}
+
+.bento-grid-services {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-rows: repeat(2, 1fr);
     gap: var(--space-md);
-    /* On passe sur un espacement plus large (md au lieu de sm) */
     width: 100%;
-    max-width: 1150px;
-    /* Un poil plus large pour donner de l'envergure aux cartes */
-    margin: 0 auto;
-    /* On ajoute une grosse marge en bas pour équilibrer la fin de la section */
-    margin-bottom: var(--space-lg);
+    max-width: 1280px;
+    margin: 0 auto var(--space-lg) auto;
+    align-items: stretch;
+}
+
+/* La grande carte de gauche s'étend sur les 2 lignes */
+.card-secondary-service.bento-large {
+    grid-row: span 2;
+    border: 1px solid rgba(0, 163, 180, 0.35);
+    background: radial-gradient(circle at bottom left, rgba(0, 163, 180, 0.08) 0%, transparent 65%), rgba(255, 255, 255, 0.02);
+}
+
+.bento-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xs);
+}
+
+.bento-features {
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+/* Ajustement du pied de carte pour aligner prix et bouton côte à côte */
+.secondary-service-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--space-sm);
+}
+
+.card-secondary-service .link-action {
+    width: auto;
+    padding: 0.55rem 1rem;
+    white-space: nowrap;
 }
 
 .card-secondary-service {
@@ -802,43 +939,90 @@ section {
     box-shadow: 0 5px 15px rgba(0, 163, 180, 0.2);
 }
 
-/* ==========================================================================
-   CONFIGURATION RESPONSIVE EXCLUSIVE (MOBILE & TABLETTE)
-   ========================================================================== */
+/* Conteneur du schéma SVG dans la grande carte de gauche */
+.bento-visual-showcase {
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-sm);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
-@media (max-width: 999px) {
-    .services-hero-header {
-        margin-bottom: var(--space-md);
-    }
+.bento-svg-art {
+    width: 100%;
+    height: auto;
+    max-height: 145px;
+    border-radius: var(--radius-sm);
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
+}
 
-    .grid-offers {
-        grid-template-columns: 1fr;
-        gap: var(--space-md);
-        padding: 0 var(--space-xs);
-    }
+/* Alignement titre + icône badge dans les cartes de droite */
+.bento-title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: var(--space-xs);
+}
 
-    .card-offer {
-        padding: var(--space-md);
-    }
+.bento-title-with-icon h4 {
+    margin-bottom: 0;
+}
 
-    .offer-target {
-        min-height: auto;
-    }
+.bento-icon-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    background: rgba(0, 163, 180, 0.12);
+    border: 1px solid rgba(0, 163, 180, 0.35);
+    color: var(--color-brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
 
-    .services-secondary-header {
-        margin-top: var(--space-md);
-    }
+/* Petits bandeaux visuels dans les cartes de droite */
+.bento-mini-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.75rem;
+    margin-bottom: var(--space-md);
+    background-color: rgba(3, 43, 53, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+}
 
-    .grid-secondary-services {
-        grid-template-columns: 1fr;
-        gap: var(--space-md);
-        padding: 0 var(--space-xs);
-        margin-bottom: var(--space-md);
-    }
+.perf-old {
+    color: rgba(248, 249, 250, 0.55);
+    text-decoration: line-through;
+}
 
-    .card-secondary-service {
-        padding: var(--space-sm);
-    }
+.perf-arrow {
+    color: var(--color-brand);
+    font-weight: 700;
+}
+
+.perf-new {
+    color: var(--color-brand);
+    font-weight: 700;
+}
+
+.seo-preview-pill {
+    justify-content: flex-start;
+    color: rgba(248, 249, 250, 0.85);
+}
+
+.google-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #10b981;
+    box-shadow: 0 0 8px #10b981;
+    flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -1357,6 +1541,65 @@ footer[role="contentinfo"] p {
 
     .valors-list {
         display: none !important;
+    }
+
+    .services-hero-header {
+        margin-bottom: var(--space-md);
+    }
+
+    .grid-offers {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        padding: 0 var(--space-xs);
+    }
+
+    .card-offer {
+        padding: var(--space-md);
+    }
+
+    .offer-target {
+        min-height: auto;
+    }
+
+    .bento-grid-services {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .card-secondary-service.bento-large {
+        grid-row: auto;
+    }
+
+    .secondary-service-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .card-secondary-service .link-action {
+        width: 100%;
+    }
+
+    .services-secondary-header {
+        margin-top: var(--space-md);
+    }
+
+    .grid-secondary-services {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        padding: 0 var(--space-xs);
+        margin-bottom: var(--space-md);
+    }
+
+    .card-secondary-service {
+        padding: var(--space-sm);
+    }
+
+    .card-offer.offer-premium {
+        transform: none;
+    }
+
+    .grid-hosting-options {
+        grid-template-columns: 1fr;
     }
 
     /* Responsive À Propos */
