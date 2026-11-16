@@ -491,10 +491,14 @@ section {
     height: auto;
     width: 100%;
     max-width: 450px;
-    object-fit: contain;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     object-position: center;
-    mask-image: radial-gradient(circle, black 60%, transparent 100%);
-    -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
+    border-radius: var(--radius-md);
+    /* Dégradé plus progressif (de 42% à 96%) pour dissoudre totalement la ligne du bureau */
+    mask-image: radial-gradient(circle at center, black 42%, rgba(0, 0, 0, 0.6) 68%, transparent 96%);
+    -webkit-mask-image: radial-gradient(circle at center, black 42%, rgba(0, 0, 0, 0.6) 68%, transparent 96%);
+    filter: drop-shadow(0 15px 35px rgba(0, 163, 180, 0.15));
 }
 
 /* ==========================================================================
@@ -1026,7 +1030,7 @@ section {
 }
 
 /* ==========================================================================
-   NVHFAST - SECTION À PROPOS CENTRÉE ET HARMONIEUSE
+   NVHFAST - SECTION À PROPOS SPLIT (PHOTO + HISTOIRE)
    ========================================================================== */
 .about-section {
     height: auto !important;
@@ -1037,75 +1041,144 @@ section {
     align-items: center;
 }
 
-/* En-tête de section centré */
-.about-header-centered {
+/* Grille 2 colonnes pour le haut de page */
+.about-hero-split {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: var(--space-xl);
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+/* Conteneur Photo & Placeholder */
+.about-photo-column {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.about-photo-wrapper {
+    width: 100%;
+    max-width: 440px;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-md);
+    border: 2px solid rgba(0, 163, 180, 0.45);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 30px rgba(0, 163, 180, 0.1);
+    overflow: hidden;
+    position: relative;
+    background: radial-gradient(circle at top right, rgba(0, 163, 180, 0.15) 0%, transparent 70%), rgba(255, 255, 255, 0.02);
+}
+
+.about-portrait {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+/* Style du Placeholder provisoire */
+.about-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    max-width: 900px;
-    margin: 0 auto var(--space-md) auto;
+    padding: var(--space-md);
+    color: var(--color-brand);
+    border: 2px dashed rgba(0, 163, 180, 0.3);
+    border-radius: calc(var(--radius-md) - 2px);
+    gap: var(--space-xs);
 }
 
-.about-header-centered .about-lead {
-    font-size: 1.25rem;
-    line-height: 1.5;
-    color: rgba(248, 249, 250, 0.75);
-    margin-top: var(--space-xs);
+.about-photo-placeholder svg {
+    opacity: 0.8;
+    margin-bottom: var(--space-xs);
 }
 
-/* Bloc de texte de l'histoire centré et calibré pour la lecture */
-.about-text-centered-block {
-    max-width: 750px;
-    margin: 0 auto var(--space-lg) auto;
+.about-photo-placeholder span {
+    font-family: var(--font-logo);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.about-photo-placeholder small {
+    font-size: 0.85rem;
+    color: rgba(248, 249, 250, 0.6);
+}
+
+/* Colonne de droite : Textes alignés à gauche */
+.about-content-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.about-content-column .section-title-left {
+    line-height: 1.2;
+    margin-bottom: var(--space-xs);
+}
+
+.about-lead-left {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+}
+
+.about-story-text {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    text-align: center;
-    /* Harmonise tout l'alignement */
+    margin-bottom: var(--space-md);
 }
 
-.about-text-centered-block p {
-    font-size: 1.1rem;
-    line-height: 1.75;
+.about-story-text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
     color: rgba(248, 249, 250, 0.85);
 }
 
-/* Style spécifique pour la première phrase d'accroche */
-.about-text-centered-block .p-highlight {
-    font-size: 1.25rem;
-    font-weight: 600;
+.about-story-text strong {
     color: var(--text-primary);
-    line-height: 1.6;
-}
-
-/* Grande Citation (Break de rythme) */
-.about-blockquote {
-    width: 100%;
-    max-width: 900px;
-    margin: var(--space-lg) auto;
-    text-align: center;
-    border-left: none;
-    /* On casse le style classique */
-    padding: 0 var(--space-md);
-}
-
-.about-blockquote blockquote {
-    font-family: var(--font-logo);
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
     font-weight: 600;
-    line-height: 1.4;
-    color: var(--color-brand);
-    letter-spacing: -0.01em;
+}
+
+/* Citation dans un encadré premium (comme sur le modèle) */
+.about-blockquote-box {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(0, 163, 180, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(0, 163, 180, 0.4);
+    border-left: 4px solid var(--color-brand);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-md);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.about-blockquote-box blockquote {
+    font-family: var(--font-logo);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin: 0;
 }
 
 /* Zone entête technique */
 .about-tech-header {
     text-align: center;
-    max-width: 700px;
+    max-width: 750px;
     margin: var(--space-lg) auto var(--space-md) auto;
 }
 
 .about-tech-header h3 {
     font-family: var(--font-logo);
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 3vw, 1.85rem);
     font-weight: 800;
     margin-bottom: var(--space-xs);
 }
@@ -1607,23 +1680,29 @@ footer[role="contentinfo"] p {
         padding: var(--space-lg) var(--space-xs) !important;
     }
 
-    .about-split {
-        flex-direction: column;
-        gap: var(--space-md);
+    .about-hero-split {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+        margin-bottom: var(--space-lg);
     }
 
-    .about-title-block,
-    .about-text-block {
-        width: 100%;
+    .about-photo-wrapper {
+        max-width: 340px;
+        aspect-ratio: 1 / 1;
+        /* Passe en carré sur mobile pour ne pas prendre tout l'écran */
     }
 
-    .about-blockquote blockquote {
-        font-size: 1.25rem;
+    .about-content-column {
+        align-items: center;
+        text-align: center;
+    }
+
+    .about-blockquote-box {
+        text-align: left;
     }
 
     .about-features-grid {
         grid-template-columns: 1fr;
-        /* Passage sur une seule colonne */
         gap: var(--space-sm);
     }
 
