@@ -687,6 +687,206 @@ section {
 }
 
 /* ==========================================================================
+   NVHFAST - LIEN PLUS D'INFOS (SERVICES) & PAGE DÉTAIL DES OFFRES
+   ========================================================================== */
+.offer-details-link {
+    display: inline-block;
+    margin-top: 0.35rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-silver);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 163, 180, 0.4);
+    padding-bottom: 2px;
+    transition: var(--transition-smooth);
+}
+
+.offer-details-link:hover {
+    color: var(--color-brand);
+    border-bottom-color: var(--color-brand);
+    transform: translateX(3px);
+}
+
+.offers-details-page {
+    width: 100%;
+    height: auto;
+    min-height: calc(100dvh - var(--header-height));
+    display: block;
+    padding: var(--space-lg) 1rem var(--space-xl) 1rem;
+    scroll-snap-align: none;
+}
+
+.offers-page-header {
+    max-width: 850px;
+    margin: 0 auto var(--space-lg) auto;
+    text-align: center;
+}
+
+.back-link-pill {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-brand);
+    text-decoration: none;
+    padding: 0.35rem 0.9rem;
+    border: 1px solid rgba(0, 163, 180, 0.35);
+    border-radius: 20px;
+    margin-bottom: var(--space-sm);
+    transition: var(--transition-smooth);
+}
+
+.back-link-pill:hover {
+    background-color: rgba(0, 163, 180, 0.12);
+}
+
+.offers-page-header h1 {
+    font-family: var(--font-logo);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: var(--space-sm);
+}
+
+.offers-page-lead {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(248, 249, 250, 0.85);
+    margin-bottom: var(--space-md);
+}
+
+.offers-anchor-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.anchor-pill {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+.anchor-pill:hover,
+.anchor-pill-highlight {
+    border-color: var(--color-brand);
+    background-color: rgba(0, 163, 180, 0.14);
+    color: var(--text-primary);
+}
+
+.offer-detail-card {
+    max-width: 960px;
+    margin: 0 auto var(--space-lg) auto;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.offer-detail-card.offer-detail-featured {
+    border: 2px solid var(--color-brand);
+    background: radial-gradient(circle at top right, rgba(0, 163, 180, 0.1) 0%, transparent 65%), rgba(255, 255, 255, 0.03);
+}
+
+.offer-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.offer-detail-header h2 {
+    font-family: var(--font-logo);
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 800;
+    margin-top: 0.35rem;
+}
+
+.offer-detail-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.offer-detail-intro {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: rgba(248, 249, 250, 0.9);
+    margin-bottom: var(--space-md);
+}
+
+.offer-target-boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.target-box {
+    background-color: rgba(3, 43, 53, 0.65);
+    border: 1px solid rgba(0, 163, 180, 0.25);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm);
+}
+
+.target-box strong {
+    display: block;
+    color: var(--color-brand);
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+}
+
+.target-box p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(248, 249, 250, 0.8);
+}
+
+.offer-detail-specs h3 {
+    font-family: var(--font-logo);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.offer-detail-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+    padding-top: var(--space-sm);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.offer-detail-footer span {
+    font-size: 0.9rem;
+    color: rgba(248, 249, 250, 0.75);
+}
+
+.offer-detail-footer strong {
+    color: var(--color-brand);
+}
+
+.offer-detail-footer .btn-hero-xl {
+    width: auto;
+    min-width: 260px;
+    padding: 0.85rem 1.5rem;
+}
+
+/* ==========================================================================
    NVHFAST - BANDEAU COMPARATIF HÉBERGEMENT & MAINTENANCE
    ========================================================================== */
 
@@ -1673,6 +1873,21 @@ footer[role="contentinfo"] p {
 
     .grid-hosting-options {
         grid-template-columns: 1fr;
+    }
+
+    /* Responsive Page Détail des Offres */
+    .offer-target-boxes {
+        grid-template-columns: 1fr;
+    }
+
+    .offer-detail-header,
+    .offer-detail-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .offer-detail-footer .btn-hero-xl {
+        width: 100%;
     }
 
     /* Responsive À Propos */

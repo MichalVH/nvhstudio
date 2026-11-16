@@ -28,5 +28,9 @@ $router->map('GET', '/contact', 'HomeController#index', 'home_contact_view');
 // Route réglementaire universelle pour les mentions légales et RGPD
 $router->map('GET', '/mentions-legales', 'PageController#legal', 'legal_privacy');
 
+// Route dédiée au détail des offres
+$router->map('GET', '/nos-offres', 'PageController#offers', 'offers_details');
+
+
 // INTERCEPTION : Route de réception et traitement sécurisé du formulaire de contact
 $router->map('POST', '/contact', 'ContactController#submit', 'contact_submit');

@@ -31,4 +31,17 @@ final class PageController
         return $response->setStatusCode(200)->setContent($html);
     }
 
+    /**
+     * Gère l'affichage de la page détaillée des offres.
+     */
+    public function offers(): Response
+    {
+        $html = $this->renderer->render('offers.html.twig', [
+            'page_title' => 'Nos Offres en Détail'
+        ]);
+
+        $response = new Response();
+        return $response->setStatusCode(200)->setContent($html);
+    }
+
 }

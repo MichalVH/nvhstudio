@@ -1,0 +1,205 @@
+{# templates/offers.html.twig #}
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+{% block meta_description %}Découvrez en détail les offres de création de sites internet et d'applications sur mesure NVH Studio pour les professionnels de la santé, artisans et TPE en Gironde.{% endblock %}
+
+{% block body %}
+    <section class="offers-details-page">
+        <div class="container">
+
+            {# --- EN-TÊTE & RETOUR ACCUEIL --- #}
+            <div class="offers-page-header">
+                <a href="{{ app.base_path }}/#services" class="back-link-pill">&larr; Retour à la vue d'ensemble</a>
+                <h1>Le détail de nos <span class="text-highlight">formules &amp; accompagnements</span></h1>
+                <p class="offers-page-lead">
+                    Chaque projet est codé sur mesure, sans modèle préfabriqué ni abonnement logiciel caché. 
+                    Comparez le contenu précis de chaque offre et choisissez celle qui correspond à votre activité.
+                </p>
+
+                {# SOMMAIRE D'ACCÈS RAPIDE AUX ANCRES #}
+                <nav class="offers-anchor-nav" aria-label="Accès rapide aux offres">
+                    <a href="#one-page" class="anchor-pill">1. Site One-Page (950€)</a>
+                    <a href="#multi-pages" class="anchor-pill anchor-pill-highlight">2. Site Multi-pages (1 400€)</a>
+                    <a href="#administrable" class="anchor-pill">3. Site Administrable (2 600€)</a>
+                    <a href="#sur-mesure" class="anchor-pill">4. Applications &amp; Sur-mesure</a>
+                </nav>
+            </div>
+
+            {# =====================================================================
+           BLOC 1 : SITE ONE-PAGE (#one-page)
+           ===================================================================== #}
+            <article id="one-page" class="offer-detail-card">
+                <div class="offer-detail-header">
+                    <div>
+                        <span class="offer-badge">L'ESSENTIEL • DÉLAI MOYEN : 1 À 2 SEMAINES</span>
+                        <h2>Site One-Page</h2>
+                    </div>
+                    <div class="offer-detail-price">
+                        <span class="price-amount">950€</span>
+                        <span class="price-tax">HT</span>
+                    </div>
+                </div>
+
+                <p class="offer-detail-intro">
+                    Une page unique, structurée par sections fluides, conçue pour présenter votre activité avec clarté et rassurer immédiatement vos futurs patients ou clients. C'est la carte de visite digitale ultime : rapide, élégante et sans fioritures.
+                </p>
+
+                <div class="offer-target-boxes">
+                    <div class="target-box">
+                        <strong>🩺 Exemple Santé &amp; Libéral :</strong>
+                        <p>Un cabinet d'infirmiers libéraux, un ostéopathe ou un psychologue qui souhaite afficher ses soins, ses horaires, son secteur d'intervention et un lien direct vers Doctolib.</p>
+                    </div>
+                    <div class="target-box">
+                        <strong>🛠️ Exemple Artisan &amp; TPE :</strong>
+                        <p>Un artisan indépendant (électricien, paysagiste, consultant) qui démarre son activité et veut inspirer confiance avec ses réalisations et un formulaire de contact rapide.</p>
+                    </div>
+                </div>
+
+                <div class="offer-detail-specs">
+                    <h3>Ce qui est inclus dans cette formule :</h3>
+                    <ul class="offer-features">
+                        <li><span class="mini-star"></span><span><strong>Maquette graphique 100 % personnalisée</strong> à vos couleurs et à l'image de votre métier.</span></li>
+                        <li><span class="mini-star"></span><span><strong>Menu de navigation intelligent</strong> avec défilement fluide vers vos rubriques (Présentation, Prestations, Contact).</span></li>
+                        <li><span class="mini-star"></span><span><strong>Code artisanal PHP / HTML / CSS</strong> : aucun thème lourd, un score de performance proche de 100/100 sur mobile.</span></li>
+                        <li><span class="mini-star"></span><span><strong>Sécurité renforcée (normes OWASP)</strong> : protection contre les robots spammeurs et chiffrement des échanges.</span></li>
+                        <li><span class="mini-star"></span><span><strong>Mise en conformité légale</strong> : intégration de vos mentions légales et bandeau de confidentialité RGPD.</span></li>
+                    </ul>
+                </div>
+
+                <div class="offer-detail-footer">
+                    <span>Option hébergement, maintenance &amp; 1h de modifs/mois : <strong>35€ HT/mois</strong> (sans engagement)</span>
+                    <a href="{{ app.base_path }}/contact" class="btn-hero-xl">Choisir le Site One-Page</a>
+                </div>
+            </article>
+
+            {# =====================================================================
+           BLOC 2 : SITE MULTI-PAGES (#multi-pages)
+           ===================================================================== #}
+            <article id="multi-pages" class="offer-detail-card offer-detail-featured">
+                <div class="offer-detail-header">
+                    <div>
+                        <span class="offer-badge badge-accent">LE BEST-SELLER SEO • DÉLAI MOYEN : 2 À 3 SEMAINES</span>
+                        <h2>Site Multi-pages</h2>
+                    </div>
+                    <div class="offer-detail-price">
+                        <span class="price-amount">1 400€</span>
+                        <span class="price-tax">HT</span>
+                    </div>
+                </div>
+
+                <p class="offer-detail-intro">
+                    Conçu pour les professionnels qui veulent ressortir en tête sur Google dans leur secteur géographique. En dédiant une page spécifique à chacune de vos spécialités, vous multipliez vos chances d'être trouvé par des clients ou patients qui recherchent précisément votre savoir-faire.
+                </p>
+
+                <div class="offer-target-boxes">
+                    <div class="target-box">
+                        <strong>🩺 Exemple Santé &amp; Libéral :</strong>
+                        <p>Un cabinet de kinésithérapie ou un centre paramédical proposant plusieurs spécialités (rééducation sportive, pédiatrie, balnéothérapie) avec une page dédiée à chaque prise en charge.</p>
+                    </div>
+                    <div class="target-box">
+                        <strong>🛠️ Exemple Artisan &amp; TPE :</strong>
+                        <p>Une entreprise du bâtiment ou une PME locale souhaitant détailler ses différents corps de métier (rénovation, dépannage, installation) avec une galerie de chantiers réalisés.</p>
+                    </div>
+                </div>
+
+                <div class="offer-detail-specs">
+                    <h3>Ce qui est inclus dans cette formule :</h3>
+                    <ul class="offer-features">
+                        <li><span class="mini-star"></span><span><strong>Architecture complète de 3 à 5 pages</strong> (ex: Accueil, Spécialités/Services, Le Cabinet/L'Entreprise, Réalisations, Contact).</span></li>
+                        <li><span class="mini-star"></span><span><strong>Stratégie SEO locale avancée</strong> : balises titres, métadonnées et URLs optimisées sur vos villes cibles (Libourne, Bordeaux, Lussac...).</span></li>
+                        <li><span class="mini-star"></span><span><strong>Intégration d'outils métiers</strong> : boutons de prise de rendez-vous en ligne (Doctolib, Maiia, Calendly) ou formulaire de pré-qualification de devis.</span></li>
+                        <li><span class="mini-star"></span><span><strong>Accompagnement rédactionnel</strong> : relecture, structuration et optimisation sémantique de vos textes pour rassurer vos visiteurs.</span></li>
+                        <li><span class="mini-star"></span><span><strong>Statistiques de fréquentation respectueuses du RGPD</strong> pour suivre l'évolution de vos visites sans cookies intrusifs.</span></li>
+                    </ul>
+                </div>
+
+                <div class="offer-detail-footer">
+                    <span>Option hébergement, maintenance &amp; 1h de modifs/mois : <strong>45€ HT/mois</strong> (sans engagement)</span>
+                    <a href="{{ app.base_path }}/contact" class="btn-hero-xl">Choisir le Site Multi-pages</a>
+                </div>
+            </article>
+
+            {# =====================================================================
+           BLOC 3 : SITE ADMINISTRABLE (#administrable)
+           ===================================================================== #}
+            <article id="administrable" class="offer-detail-card">
+                <div class="offer-detail-header">
+                    <div>
+                        <span class="offer-badge">AUTONOMIE TOTALE • DÉLAI MOYEN : 3 À 5 SEMAINES</span>
+                        <h2>Site Administrable</h2>
+                    </div>
+                    <div class="offer-detail-price">
+                        <span class="price-amount">2 600€</span>
+                        <span class="price-tax">HT</span>
+                    </div>
+                </div>
+
+                <p class="offer-detail-intro">
+                    Vous souhaitez garder la main sur votre site au quotidien sans dépendre d'un prestataire ? Je développe pour vous une interface d'administration privée, ultra-simple et sécurisée, pensée uniquement autour de vos besoins réels.
+                </p>
+
+                <div class="offer-target-boxes">
+                    <div class="target-box">
+                        <strong>🩺 Exemple Santé &amp; Libéral :</strong>
+                        <p>Une maison de santé pluridisciplinaire (MSP) qui doit mettre à jour régulièrement l'arrivée de nouveaux praticiens, les remplacements, les campagnes de prévention ou les horaires de garde.</p>
+                    </div>
+                    <div class="target-box">
+                        <strong>🛠️ Exemple Artisan &amp; TPE :</strong>
+                        <p>Une PME, un commerce ou un domaine viticole qui publie régulièrement des actualités, des nouveautés catalogue ou des photos de ses dernières réalisations.</p>
+                    </div>
+                </div>
+
+                <div class="offer-detail-specs">
+                    <h3>Ce qui est inclus dans cette formule :</h3>
+                    <ul class="offer-features">
+                        <li><span class="mini-star"></span><span><strong>Architecture évolutive jusqu'à 10 pages</strong> incluant un module Actualités, Blog ou Catalogue de réalisations.</span></li>
+                        <li><span class="mini-star"></span><span><strong>Back-Office NVH Studio sur mesure</strong> : une interface claire et intuitive (zéro bouton inutile, prise en main en 15 minutes).</span></li>
+                        <li><span class="mini-star"></span><span><strong>Traitement automatique des photos</strong> : dès que vous envoyez une photo depuis votre téléphone ou ordinateur, le système la compresse et la convertit en format WebP/AVIF.</span></li>
+                        <li><span class="mini-star"></span><span><strong>Formation individuelle en visio ou sur place</strong> + guide d'utilisation personnalisé fourni à la livraison.</span></li>
+                    </ul>
+                </div>
+
+                <div class="offer-detail-footer">
+                    <span>Option hébergement, maintenance &amp; 1h de modifs/mois : <strong>55€ HT/mois</strong> (sans engagement)</span>
+                    <a href="{{ app.base_path }}/contact" class="btn-hero-xl">Demander une démonstration</a>
+                </div>
+            </article>
+
+            {# =====================================================================
+           BLOC 4 : DÉVELOPPEMENT SUR MESURE (#sur-mesure)
+           ===================================================================== #}
+            <article id="sur-mesure" class="offer-detail-card">
+                <div class="offer-detail-header">
+                    <div>
+                        <span class="offer-badge badge-accent">INGÉNIERIE LOGICIELLE • SUR DEVIS</span>
+                        <h2>Applications Web &amp; Outils Métiers</h2>
+                    </div>
+                    <div class="offer-detail-price">
+                        <span class="price-amount" style="font-size: 2rem;">Sur devis</span>
+                    </div>
+                </div>
+
+                <p class="offer-detail-intro">
+                    Les logiciels standards du marché ne s'adaptent jamais parfaitement à votre façon de travailler. Fort de mon expérience terrain et de ma maîtrise du développement PHP/SQL, je conçois des outils numériques légers qui vous font gagner des heures chaque semaine.
+                </p>
+
+                <div class="offer-detail-specs">
+                    <h3>Exemples de réalisations sur mesure :</h3>
+                    <ul class="offer-features">
+                        <li><span class="mini-star"></span><span><strong>Portails &amp; espaces privés sécurisés :</strong> partage de documents, suivi de dossiers ou espace réservé à vos adhérents/clients.</span></li>
+                        <li><span class="mini-star"></span><span><strong>Calculateurs &amp; simulateurs interactifs :</strong> estimation de tarifs en ligne, pré-diagnostic ou configurateur de prestations.</span></li>
+                        <li><span class="mini-star"></span><span><strong>Outils de gestion interne :</strong> suivi de planning, gestion de stock simplifiée ou automatisation de vos devis et factures.</span></li>
+                    </ul>
+                </div>
+
+                <div class="offer-detail-footer">
+                    <span>Cahier des charges et premier rendez-vous d'étude <strong>100 % gratuits</strong></span>
+                    <a href="{{ app.base_path }}/contact" class="btn-hero-xl">Discuter de mon besoin spécifique</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+{% endblock %}
+
