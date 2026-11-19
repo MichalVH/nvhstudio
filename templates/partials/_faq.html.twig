@@ -1,0 +1,75 @@
+{# templates/partials/_faq.html.twig #}
+{% set faqs = [
+    {
+        question: "Le site internet m'appartient-il vraiment à 100 % ?",
+        answer: "Oui, intégralement. Contrairement aux solutions par abonnement où vous louez votre site, vous êtes l'unique propriétaire du code source, du nom de domaine et de vos contenus dès la livraison."
+    },
+    {
+        question: "Mon site respectera-t-il les règles déontologiques de mon Ordre (Santé) ?",
+        answer: "Tout à fait. Connaissant les exigences du milieu médical et paramédical, je conçois des sites purement informatifs, sans publicité comparative ni démarche commerciale interdite, et 100 % conformes au RGPD."
+    },
+    {
+        question: "Je n'ai ni textes ni photos professionnelles, comment fait-on ?",
+        answer: "Ne vous bloquez pas pour ça. Je vous accompagne dans la structuration et la rédaction de vos pages après un simple échange de 30 minutes sur votre métier, et je vous conseille pour obtenir des visuels adaptés."
+    },
+    {
+        question: "Quels sont les délais moyens pour mettre mon site en ligne ?",
+        answer: "Comptez 1 à 2 semaines pour un site One-Page, 2 à 3 semaines pour un site Multi-pages, et 3 à 5 semaines pour un site Administrable. Un seul entretien de cadrage suffit pour lancer la production."
+    },
+    {
+        question: "Comment fonctionne l'option Hébergement & Maintenance ?",
+        answer: "Elle est totalement facultative et sans engagement. Vous pouvez gérer votre hébergement vous-même (0 €/mois chez NVH) ou me déléguer la technique, les sauvegardes et 1h de modifications mensuelles (35 € à 55 € HT/mois)."
+    },
+    {
+        question: "Puis-je démarrer avec un One-Page et le faire évoluer plus tard ?",
+        answer: "Oui. Mon architecture sur-mesure en PHP pur est pensée pour être évolutive. Vous pouvez lancer votre activité avec l'offre Essentiel à 950 € HT et ajouter de nouvelles pages ou un espace d'administration par la suite."
+    }
+] %}
+
+<section id="faq" class="faq-section" aria-labelledby="faq-heading">
+    <div class="container">
+        <div class="faq-header">
+            <span class="offer-badge badge-accent">Questions fréquentes</span>
+            <h2 id="faq-heading" class="section-title">
+                Tout ce qu'il faut savoir <span class="text-highlight">avant de se lancer</span>
+            </h2>
+            <p class="faq-lead">
+                Des réponses claires sur la propriété de votre site, la déontologie médicale et mon accompagnement au quotidien.
+            </p>
+        </div>
+
+        <div class="faq-list">
+            {% for item in faqs %}
+                <details class="faq-item">
+                    <summary class="faq-question">
+                        <span>{{ item.question }}</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-answer">
+                        <p>{{ item.answer }}</p>
+                    </div>
+                </details>
+            {% endfor %}
+        </div>
+    </div>
+
+    {# --- BALISAGE SEO GOOGLE (RICH SNIPPETS FAQ) --- #}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {% for item in faqs %}
+            {
+                "@type": "Question",
+                "name": {{ item.question|json_encode|raw }},
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": {{ item.answer|json_encode|raw }}
+                }
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ]
+    }
+    </script>
+</section>
