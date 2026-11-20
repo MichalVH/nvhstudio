@@ -10,11 +10,12 @@ export class Navigation {
         this.navLinks = [];
         this.observer = null;
         this.isScrolling = false;
-        this.onLinkClickCallback = onLinkClickCallback; // Reçoit le signal de fermeture
+        this.onLinkClickCallback = onLinkClickCallback;
     }
 
     init() {
-        this.navLinks = document.querySelectorAll('nav ul a, .logo-studio, .cta-group a, .footer-link-legal[data-section]');
+        // Cible automatiquement TOUS les liens possédant l'attribut data-section
+        this.navLinks = document.querySelectorAll('a[data-section]');
 
         if (this.navLinks.length > 0) {
             this.registerEvents();
@@ -35,11 +36,13 @@ export class Navigation {
         const sectionId = link.getAttribute('data-section');
         const targetSection = document.getElementById(sectionId);
 
+        // Si la section n'existe pas sur la page courante (ex: depuis /nos-offres ou /mentions-legales),
+        // on laisse le navigateur rediriger normalement vers l'accueil.
         if (!targetSection) return;
 
         e.preventDefault();
 
-        // Déclenche l'action de fermeture du menu si elle existe (ton menu burger)
+        // Ferme le menu burger mobile s'il est ouvert
         if (typeof this.onLinkClickCallback === 'function') {
             this.onLinkClickCallback();
         }
@@ -51,7 +54,6 @@ export class Navigation {
 
         this.isScrolling = true;
 
-        // Appel natif du scroll fluide géré par le navigateur
         targetSection.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
@@ -82,10 +84,16 @@ export class Navigation {
             });
         }, options);
 
+        // Évite d'observer plusieurs fois la même section s'il y a plusieurs boutons vers #contact
+        const observedSections = new Set();
+
         this.navLinks.forEach(link => {
             const sectionId = link.getAttribute('data-section');
             const section = document.getElementById(sectionId);
-            if (section) this.observer.observe(section);
+            if (section && !observedSections.has(section)) {
+                observedSections.add(section);
+                this.observer.observe(section);
+            }
         });
     }
 
